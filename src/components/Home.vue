@@ -3,7 +3,10 @@
 
  
       <el-row :gutter="24">
-       
+       <el-col :sm="24" :md="6">
+      <div class="grid-content row-bg">
+      <MethodFilter></MethodFilter>
+      </div></el-col>
         <el-col :sm="24" :md="24"><div class="grid-content">
             <el-row :gutter="24" ><div class="grid-content">  
               <div v-for="method in methods" :key="method.id">
