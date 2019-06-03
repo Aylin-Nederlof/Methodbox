@@ -1,19 +1,18 @@
 <template>
   <div class="hello">
-    
     <h2>Optimalisatie</h2>
     <el-checkbox-group v-model="optimalisatie">
       <el-checkbox label="Focus"></el-checkbox>
       <el-checkbox label="Zichtbaarheid"></el-checkbox>
       <el-checkbox label="Overtuigen"></el-checkbox>
       <el-checkbox label="Geliefd"></el-checkbox>
-    </el-checkbox-group>    
-    <h2>Optimalisatie</h2>
+    </el-checkbox-group>
+    <h2>Tijd</h2>
     <el-checkbox-group v-model="tijd">
       <el-checkbox label="kort"></el-checkbox>
       <el-checkbox label="middel"></el-checkbox>
       <el-checkbox label="lang"></el-checkbox>
-    </el-checkbox-group>  
+    </el-checkbox-group>
   </div>
 </template>
 
@@ -23,7 +22,7 @@ export default {
   data () {
     return {
       optimalisatie: [],
-      tijd:          [],
+      tijd: []
     }
   }
 }
@@ -43,8 +42,6 @@ export default {
 .el-checkbox .is-bordered:last-child{
  margin: 0px;
 }
-
-
 
 h1, h2 {
   font-weight: normal;

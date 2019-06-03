@@ -1,29 +1,24 @@
 <template>
-  <div class="wrapper"> 
-
- 
-      <el-row :gutter="24">
-       <el-col :sm="24" :md="6">
+  <div class="wrapper">
+    <el-row :gutter="24">
+       <el-col :sm="24" :md="24">
       <div class="grid-content row-bg">
       <MethodFilter></MethodFilter>
       </div></el-col>
         <el-col :sm="24" :md="24"><div class="grid-content">
-            <el-row :gutter="24" ><div class="grid-content">  
+            <el-row :gutter="24" ><div class="grid-content">
               <div v-for="method in methods" :key="method.id">
-                <MethodCards :methodData="method"></MethodCards> 
+                <MethodCards :methodData="method"></MethodCards>
               </div>
             </div></el-row>
         </div></el-col>
-      </el-row>
-      
-  
-  
-  </div> 
+    </el-row>
+  </div>
 </template>
 
 <script>
-import MethodFilter from "./MethodFilter.vue"
-import MethodCards from "./MethodCards.vue"
+import MethodFilter from './MethodFilter.vue'
+import MethodCards from './MethodCards.vue'
 
 export default {
   name: 'Home',
@@ -32,37 +27,36 @@ export default {
       msg: 'Welcome to Your Vue.js App',
       checked: true,
       methods: [
-      { id:1, 
-        title:'test methode',
-        discription:' Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas faucibus mollis interdum.',
-        timesUsed:6,
-        ROI: 123,
-        implementTime: '14d', // in work days
-        implementCosts: 219,
-      },
-      { id:2, 
-        title:'Methodetje',
-        discription:' Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas faucibus mollis interdum.',
-        timesUsed:6,
-        ROI: 123,
-        implementTime: '14d', // in work days
-        implementCosts: 219,
-      },
-      { id:3, 
-        title:'Nummertje 3',
-        discription:' Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas faucibus mollis interdum.',
-        timesUsed:6,
-        ROI: 123,
-        implementTime: '14d', // in work days
-        implementCosts: 219.26, //in euro's
-      },
+        { id: 1,
+          title: 'test methode',
+          discription: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas faucibus mollis interdum.',
+          timesUsed: 6,
+          ROI: 123,
+          implementTime: '14d', // in work days
+          implementCosts: 219
+        },
+        { id: 2,
+          title: 'Methodetje',
+          discription: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas faucibus mollis interdum.',
+          timesUsed: 6,
+          ROI: 123,
+          implementTime: '14d', // in work days
+          implementCosts: 219
+        },
+        { id: 3,
+          title: 'Nummertje 3',
+          discription: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas faucibus mollis interdum.',
+          timesUsed: 6,
+          ROI: 123,
+          implementTime: '14d', // in work days
+          implementCosts: 219.26 // in euro's
+        }
       ]
     }
   },
   components: {MethodCards, MethodFilter}
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @media only screen and (min-width: 1200px) {
@@ -80,7 +74,6 @@ export default {
 
 .el-row {
     margin-bottom: 20px;
-    
     }
 .el-row:last-child {
       margin-bottom: 0;
@@ -101,13 +94,11 @@ export default {
   .grid-content {
     border-radius: 4px;
     min-height: 36px;
-    
   }
   .row-bg {
     padding: 10px 0;
     background-color: #f9fafc;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
-
   }
 
 h1, h2 {

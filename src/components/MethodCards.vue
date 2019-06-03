@@ -1,49 +1,39 @@
 <template>
-  <div class="methodContent"> 
-
-  <el-col   :xs="24" :sm="12" :md="12" :lg="8">
-    <el-card :body-style="{ padding: '16px 16px 0' }" class="method" shadow="hover">
-      
-      <i class="el-icon-info"></i>
+  <div class="methodContent">
+    <el-col :xs="24" :sm="12" :md="12" :lg="8">
+      <el-card :body-style="{ padding: '16px 16px 0' }" class="method" shadow="hover">
+        <i class="el-icon-info"></i>
         <h2 class="cardTitle">{{methodData.title}}</h2>
-        
-        
-      <div style="float: right; padding: 3px 0"><font-awesome-icon icon="recycle"/> <span> {{methodData.timesUsed}}</span></div>
-      <div style="padding: 0;">
+        <div style="float: right; padding: 3px 0"><font-awesome-icon icon="recycle"/> <span> {{methodData.timesUsed}}</span></div>
+        <div style="padding: 0;">
         <p class="beschrijving">{{methodData.discription}}</p>
-        <div class="bottom clearfix">
-          <el-row type="flex" class="row-bg" justify="start" style="margin: 0px;">
-            <el-button type="text" class="button">Bekijk details</el-button>
-            </el-row>
-            <el-row :gutter="24"  style="padding: 0px;" >
-              <el-col :span="8"><div class="specificaties" style="text-align: left"><font-awesome-icon icon="percentage"/><span> {{methodData.ROI}}</span></div></el-col>
-             </el-row>
+          <div class="bottom clearfix">
+            <el-row type="flex" class="row-bg" justify="start" style="margin: 0px;">
+              <el-button type="text" class="button">Bekijk details</el-button>
+              </el-row>
+              <el-row :gutter="24"  style="padding: 0px;">
+                <el-col :span="8"><div class="specificaties" style="text-align: left"><font-awesome-icon icon="percentage"/><span> {{methodData.ROI}}</span></div></el-col>
+                <el-col :span="8"><div class="specificaties" style="text-align: center"><font-awesome-icon icon="clock"/><span> {{methodData.implementTime}}</span></div></el-col>
+                <el-col :span="8"><div class="specificaties" style="text-align: right"><font-awesome-icon icon="euro-sign"/><span> {{methodData.implementCosts}}</span></div></el-col>
+              </el-row>
+          </div>
         </div>
-      </div>
-     
-    </el-card>
-  </el-col>
-
-  
-  
-  
-  </div> 
+      </el-card>
+    </el-col>
+  </div>
 </template>
-
 <script>
-
 
 export default {
   name: 'MethodCards',
-  props:['methodData'],
+  props: ['methodData'],
   data () {
     return {
-      
+
     }
   }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .methodContent .el-button{
@@ -65,8 +55,6 @@ export default {
     font-size: 14px;
   }
 
-
-
   .clearfix:before,
   .clearfix:after {
     float: left;
@@ -77,17 +65,13 @@ export default {
     clear: both
   }
 
-  
-
 .el-row {
     margin-bottom: 20px;
-    
     }
 .el-row:last-child {
-      margin-bottom: 0;
+    margin-bottom: 0;
 }
   .el-col {
-
     margin-bottom: 20px;
     border-radius: 4px;
   }
@@ -97,7 +81,7 @@ export default {
   /* .bg-purple {
     background: #d3dce6;
   } */
- 
+
   .grid-content {
     border-radius: 4px;
     min-height: 36px;
@@ -109,8 +93,6 @@ export default {
 
 h1, h2 {
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-
-  
 }
 h2{
   font-size: 16px;
