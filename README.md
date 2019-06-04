@@ -56,4 +56,4 @@ Voor het ontwikkelen kan gebuik gemaakt worden van een code editor. Voor het ini
 
 Ik wil no.dots bedanken voor de mogelijkheid van deze afstudeeropdracht.
 Daarnaast wil ik alle deelnemers van de usertesten bedanken voor hun medewerking.
-Tot slot wil Frens Vonken, andere docenten en studenten bedanken voor hun feecback.
+Tot slot wil Frens Vonken, andere docenten en studenten bedanken voor de feedback.
