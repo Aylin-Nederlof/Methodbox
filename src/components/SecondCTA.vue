@@ -1,6 +1,6 @@
 <template>
   <button class="SecondCTA">
-  <p><slot>Second CTA</slot></p>
+  <slot>Second CTA</slot>
   </button>
 </template>
 
@@ -19,19 +19,15 @@ export default {
 .SecondCTA {
   height: 48px;
   color: #1F2933;
-  border:1px solid #1F2933;
+  border: 1px solid #1F2933;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0);
-  font-weight: bold;
   display: flex;
   align-items: center;
-  padding: 0;
-}
-
-.SecondCTA p{
   text-align: center;
-  margin: 12px 16px;
-  line-height: 24px;
+  padding: 12px 16px;
+  font: inherit;
+  font-weight: bold;
   align-self: middle;
 }
 </style>
