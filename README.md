@@ -39,7 +39,7 @@ npm run dev
 Dit opent de door jou gekozen versie in een development server op localhost:8080
 
 ## Ontwikkeling
-Voor het ontwikkelen kan gebuik gemaakt worden van een code editor. Voor het initiele product is Visual stidio code gebruikt, maar je kunt ook andere editors gebruiken.
+Voor het ontwikkelen kan gebuik gemaakt worden van een code editor. Voor het initiële product is Visual stidio code gebruikt, maar je kunt ook andere editors gebruiken.
 
 * [Visual studio code](https://code.visualstudio.com/) - De code editor gebruikt voor de ontwikkeling.
 
