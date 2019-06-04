@@ -1,8 +1,36 @@
 <template>
   <div class="methodContent">
     <el-col :xs="24" :sm="12" :md="12" :lg="8">
+      <div class="card-bg">
+        <el-row>
+          <el-col :span="20">
+            <div class="categoryTitle">
+              <div class="categorie" v-bind:style="{ backgroundColor: categorieKleur }"></div>
+              <div>
+                <h2>{{methodData.title}}</h2>
+                <div class="subTitle">{{methodData.category}} - {{methodData.subCategory}}</div>
+              </div>
+            </div>
+          </el-col>
+          <el-col :span="4" class="alignItemsRight">{{methodData.timesUsed}}x</el-col>
+        </el-row>
+        <el-row>
+          <div class="beschrijving">
+            <p>{{methodData.discription}}</p>
+          </div>
+        </el-row>
+        <el-row>
+          <label>Doelgroep:</label>
+          <div class="doelgroep">
+              <doelgroepTag v-for="(doelgroeptag, index) in methodData.doelgroep" :key="index">{{doelgroeptag}}</doelgroepTag>
+          </div>
+        </el-row>
+
+      </div>
+    </el-col>
+    <!-- <el-col :xs="24" :sm="12" :md="12" :lg="8">
       <div  class="card-bg" shadow="hover">
-        <i class="el-icon-info"></i>
+        <div class="categorie"></div>
         <h2 class="cardTitle">{{methodData.title}}</h2>
         <div style="float: right; padding: 3px 0"><font-awesome-icon icon="recycle"/> <span> {{methodData.timesUsed}}</span></div>
         <div style="padding: 0;">
@@ -19,11 +47,12 @@
           </div>
         </div>
       </div>
-    </el-col>
+    </el-col> -->
   </div>
-
 </template>
 <script>
+import thirdCTA from './thirdCTA.vue'
+import doelgroepTag from './doelgroepTag.vue'
 
 export default {
   name: 'MethodCards',
@@ -32,11 +61,37 @@ export default {
     return {
 
     }
-  }
+  },
+  computed: {
+    categorieKleur: function () {
+      var kleur = ''
+      if (this.methodData.category === 'focus') {
+        kleur = 'rgba(218,0,255,1)'
+      } else if (this.methodData.category === 'visibility') {
+        kleur = 'rgba(255,0,91,1)'
+      } else if (this.methodData.category === 'transfer') {
+        kleur = 'rgba(0,176,255,1)'
+      } else if (this.methodData.category === 'fulfill') {
+        kleur = 'rgba(255,213,0,1)'
+      } else {
+        kleur = 'deze'
+      }
+      return kleur
+    }
+  },
+    components: {thirdCTA, doelgroepTag}
+
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style >
+.categorie{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin:0 16px 0 0;
+}
+
 .methodContent .el-button{
   padding:0;
 }
@@ -69,8 +124,6 @@ export default {
 .el-row:last-child {
     margin-bottom: 0;
 }
-  
-
 ul {
   list-style-type: none;
   padding: 0;
