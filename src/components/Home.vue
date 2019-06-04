@@ -1,24 +1,39 @@
 <template>
-  <div class="wrapper">
-    <el-row :gutter="24">
-       <el-col :sm="24" :md="24">
-      <div class="grid-content row-bg">
-      <MethodFilter></MethodFilter>
-      </div></el-col>
-        <el-col :sm="24" :md="24"><div class="grid-content">
-            <el-row :gutter="24" ><div class="grid-content">
-              <div v-for="method in methods" :key="method.id">
-                <MethodCards :methodData="method"></MethodCards>
-              </div>
-            </div></el-row>
-        </div></el-col>
+<div class="wrapper">
+  <div class="menu">
+  <el-row type="flex"  class="menu-bg" justify="space-between" align="middle">
+      <el-col :sm="8" :md="10" :lg="7">
+        <img class="logo" src="../assets/logo.png">
+        <h4>Methodbox</h4>
+      </el-col>
+      <el-col :sm="8" :md="6" :lg="10">haha</el-col>
+      <el-col :sm="8" :md="8" :lg="7" class="alignItemsRight">
+        <MainCTA class="alignedRight"><font-awesome-icon icon="percentage" class="iconMarginRight"/> Voeg methode toe</MainCTA>
+      </el-col>
     </el-row>
+  </div>
+  <div class="methods">
+      <el-row :gutter="24">
+        <el-col :sm="24" :md="24">
+        <div class="grid-content card-bg">
+        <MethodFilter></MethodFilter>
+        </div></el-col>
+          <el-col :sm="24" :md="24">
+              <el-row :gutter="24" >
+                <div v-for="method in methods" :key="method.id">
+                  <MethodCards :methodData="method"></MethodCards>
+                </div>
+              </el-row>
+          </el-col>
+      </el-row>
+      </div>
   </div>
 </template>
 
 <script>
 import MethodFilter from './MethodFilter.vue'
 import MethodCards from './MethodCards.vue'
+import MainCTA from './MainCTA.vue'
 
 export default {
   name: 'Home',
@@ -54,19 +69,19 @@ export default {
       ]
     }
   },
-  components: {MethodCards, MethodFilter}
+  components: {MethodCards, MethodFilter, MainCTA}
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @media only screen and (min-width: 1200px) {
- .wrapper{
+ .methods{
   width: 90%;
   margin: 0 auto;
 }
 }
 @media only screen and (min-width: 1920px) {
- .wrapper{
+ .methods{
   width: 80%;
   margin: 0 auto;
 }
@@ -78,32 +93,8 @@ export default {
 .el-row:last-child {
       margin-bottom: 0;
 }
-  .el-col {
-    margin-bottom: 20px;
-    border-radius: 4px;
-  }
-  .bg-purple-dark {
-    background: #99a9bf;
-  }
-  .bg-purple {
-    background: #d3dce6;
-  }
-  .bg-purple-light {
-    background: #e5e9f2;
-  }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
-  }
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
-  }
+  
 
-h1, h2 {
-  font-weight: normal;
-}
 ul {
   list-style-type: none;
   padding: 0;

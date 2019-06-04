@@ -43,11 +43,6 @@ export default {
  margin: 0px;
 }
 
-h1, h2 {
-  font-weight: normal;
-  text-align: left;
-  margin: 16px 16px;
-}
 ul {
   list-style-type: none;
   padding: 0;
