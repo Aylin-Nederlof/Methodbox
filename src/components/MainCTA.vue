@@ -1,5 +1,5 @@
 <template>
-  <button>
+  <button class="mainCTA">
   <p><slot></slot></p>
   </button>
 </template>
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style>
-button{
+.mainCTA {
   height: 48px;
   color: white;
   border-radius: 4px;
@@ -27,7 +27,7 @@ button{
   padding: 0;
 }
 
-p{
+.mainCTA p{
   text-align: center;
   margin: 12px 16px;
   line-height: 24px;
