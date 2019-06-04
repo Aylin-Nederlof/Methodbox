@@ -1,6 +1,6 @@
 <template>
   <button class="mainCTA">
-  <p><slot></slot></p>
+  <slot></slot>
   </button>
 </template>
 
@@ -21,16 +21,13 @@ export default {
   color: white;
   border-radius: 4px;
   background-color: #1F2933;
+  font: inherit;
   font-weight: bold;
   display: flex;
   align-items: center;
-  padding: 0;
-}
-
-.mainCTA p{
   text-align: center;
-  margin: 12px 16px;
-  line-height: 24px;
+  padding: 12px 16px;
+  font-size: inherit;
   align-self: middle;
 }
 </style>
