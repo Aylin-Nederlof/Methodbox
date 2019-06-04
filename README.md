@@ -41,13 +41,19 @@ Dit opent de door jou gekozen versie in een development server op localhost:8080
 ## Ontwikkeling
 Voor het ontwikkelen kan gebuik gemaakt worden van een code editor. Voor het initiele product is Visual stidio code gebruikt, maar je kunt ook andere editors gebruiken.
 
-[Visual studio code](https://code.visualstudio.com/) - De code editor gebruikt voor de ontwikkeling.
+* [Visual studio code](https://code.visualstudio.com/) - De code editor gebruikt voor de ontwikkeling.
 
 ## Frameworks en libraries
-[Vue.js](https://vuejs.org/) - Javascript framework
+* [Vue.js](https://vuejs.org/) - Javascript framework
 
-[Element](https://element.eleme.io/#/en-US) - a Vue 2.0 based component library.
+* [Element](https://element.eleme.io/#/en-US) - a Vue 2.0 based component library.
 
 ## Auteur
-Initial work by Aylin Nederlof - [Github](https://github.com/Aylin-Nederlof/Methodbox)
+*Initial work* by Aylin Nederlof - [Github](https://github.com/Aylin-Nederlof/Methodbox)
 
+
+## Dankwoord
+
+Ik wil no.dots bedanken voor de mogelijkheid van deze afstudeeropdracht.
+Daarnaast wil ik alle deelnemers van de usertesten bedanken voor hun medewerking.
+Tot slot wil Frens Vonken, andere docenten en studenten bedanken voor hun feecback.
