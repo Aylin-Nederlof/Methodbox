@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="filter card-bg">
     <h2>Optimalisatie</h2>
     <el-checkbox-group v-model="optimalisatie">
       <el-checkbox label="Focus"></el-checkbox>
@@ -30,6 +30,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.filter{
+  margin: 16px 0 24px;
+}
+
 .el-checkbox-group{
  margin: 20px 0;
  text-align: left;
@@ -51,7 +55,5 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-a {
-  color: #42b983;
-}
+
 </style>
