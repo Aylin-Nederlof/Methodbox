@@ -1,58 +1,79 @@
 <template>
   <div class="methodContent">
     <el-col :xs="24" :sm="12" :md="12" :lg="8">
-      <div class="card-bg">
+      <div class="method card-bg">
         <el-row>
           <el-col :span="20">
-            <div class="categoryTitle">
-              <div class="categorie" v-bind:style="{ backgroundColor: categorieKleur }"></div>
-              <div>
-                <h2>{{methodData.title}}</h2>
-                <div class="subTitle">{{methodData.category}} - {{methodData.subCategory}}</div>
+            <router-link to="/DetailView">
+              <div class="categoryTitle">
+                <div class="categorie" v-bind:style="{ backgroundColor: categorieKleur }"></div>
+                <div>
+                  <h2>{{methodData.title}}</h2>
+                  <div class="subTitle">{{methodData.category}} - {{methodData.subCategory}}</div>
+                </div>
               </div>
-            </div>
+            </router-link>
           </el-col>
           <el-col :span="4" class="alignItemsRight">{{methodData.timesUsed}}x</el-col>
         </el-row>
         <el-row>
-          <div class="beschrijving">
+          <div class="section">
             <p>{{methodData.discription}}</p>
           </div>
         </el-row>
-        <el-row>
+        <el-row class="section">
           <label>Doelgroep:</label>
-          <div class="doelgroep">
+          <div class="tags">
               <doelgroepTag v-for="(doelgroeptag, index) in methodData.doelgroep" :key="index">{{doelgroeptag}}</doelgroepTag>
           </div>
         </el-row>
+        <el-row  class="section">
+          <label>Gemiddelde resultaten:</label>
+          <el-row :gutter="48">
+          <el-col :xs="24" :sm="12" :md="12" :lg="12">
+              <Result>
+                <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/ROI.svg" alt="">
+                <div slot="Key" class="subTitle">ROI</div>
+                <div slot="Value" class="subTitle">{{gemROI}}%</div>
+              </Result>
+          </el-col>
+          <el-col :xs="24" :sm="12" :md="12" :lg="12">
+              <Result>
+                <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Doorlooptijd.svg" alt="">
+                <div slot="Key" class="subTitle">Doorloop tijd</div>
+                <div slot="Value" class="subTitle">{{gemDoorlooptijd}}d</div>
+              </Result>
+          </el-col>
+          <el-col :xs="24" :sm="12" :md="12" :lg="12">
+              <Result >
+                <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Implementatietijd.svg" alt="">
+                <div slot="Key" class="subTitle">Impl. tijd</div>
+                <div slot="Value" class="subTitle">{{gemImplementatietijd}}u</div>
+              </Result>
+          </el-col>
+          <el-col :xs="24" :sm="12" :md="12" :lg="12">
+              <Result>
+                <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Kosten.svg" alt="">
+                <div slot="Key" class="subTitle">Kosten</div>
+                <div slot="Value" class="subTitle">€ {{gemKosten}}</div>
+              </Result>
+          </el-col>
+          </el-row>
+          </el-row>
+          <el-row class="section">
+            <router-link :to="{ name: 'DetailView', params: { methode: methodData }}"><thirdCTA>Bekijk details</thirdCTA></router-link>
 
+            <!-- <router-link to="/DetailView"><thirdCTA>Bekijk details</thirdCTA></router-link>              -->
+
+          </el-row>
       </div>
     </el-col>
-    <!-- <el-col :xs="24" :sm="12" :md="12" :lg="8">
-      <div  class="card-bg" shadow="hover">
-        <div class="categorie"></div>
-        <h2 class="cardTitle">{{methodData.title}}</h2>
-        <div style="float: right; padding: 3px 0"><font-awesome-icon icon="recycle"/> <span> {{methodData.timesUsed}}</span></div>
-        <div style="padding: 0;">
-        <p class="beschrijving">{{methodData.discription}}</p>
-          <div class="bottom clearfix">
-            <el-row type="flex" justify="start" style="margin: 0px;">
-              <el-button type="text" class="button">Bekijk details</el-button>
-              </el-row>
-              <el-row :gutter="24"  style="padding: 0px;">
-                <el-col :span="8"><div class="specificaties" style="text-align: left"><font-awesome-icon icon="percentage"/><span> {{methodData.ROI}}</span></div></el-col>
-                <el-col :span="8"><div class="specificaties" style="text-align: center"><font-awesome-icon icon="clock"/><span> {{methodData.implementTime}}</span></div></el-col>
-                <el-col :span="8"><div class="specificaties" style="text-align: right"><font-awesome-icon icon="euro-sign"/><span> {{methodData.implementCosts}}</span></div></el-col>
-              </el-row>
-          </div>
-        </div>
-      </div>
-    </el-col> -->
   </div>
 </template>
 <script>
 import thirdCTA from './thirdCTA.vue'
 import doelgroepTag from './doelgroepTag.vue'
+import Result from './Result.vue'
 
 export default {
   name: 'MethodCards',
@@ -71,20 +92,95 @@ export default {
         kleur = 'rgba(255,0,91,1)'
       } else if (this.methodData.category === 'transfer') {
         kleur = 'rgba(0,176,255,1)'
-      } else if (this.methodData.category === 'fulfill') {
+      } else if (this.methodData.category === 'fullfil') {
         kleur = 'rgba(255,213,0,1)'
       } else {
         kleur = 'deze'
       }
       return kleur
-    }
+    },
+    
+    gemOpbrengsten: function () {
+      let sum = 0
+      let aantalKlanten = 0
+      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
+      sum += this.methodData.klantresultaten[i].Opbrengsten
+      aantalKlanten++
+      }
+      var avg = sum / aantalKlanten
+      return parseFloat(avg.toFixed(2))
+    },
+    gemROI: function () {
+      let sum = 0
+      let aantalKlanten = 0
+      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
+      sum += this.methodData.klantresultaten[i].ROI
+      aantalKlanten++
+      }
+      var avg = sum / aantalKlanten
+      return parseFloat(avg.toFixed(0))
+    },
+    gemImplementatietijd: function () {
+      let sum = 0
+      let aantalKlanten = 0
+      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
+      sum += this.methodData.klantresultaten[i].implementatietijd
+      aantalKlanten++
+      }
+      var avg = sum / aantalKlanten
+      return parseFloat(avg.toFixed(0))
+    },
+    gemDoorlooptijd: function () {
+      let sum = 0
+      let aantalKlanten = 0
+      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
+      sum += this.methodData.klantresultaten[i].doorlooptijd
+      aantalKlanten++
+      }
+      var avg = sum / aantalKlanten
+      return parseFloat(avg.toFixed(0))
+    },
+    gemKosten: function () {
+      let sum = 0
+      let aantalKlanten = 0
+      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
+      sum += this.methodData.klantresultaten[i].kosten
+      aantalKlanten++
+      }
+      var avg = sum / aantalKlanten
+      return parseFloat(avg.toFixed(2))
+    },
+    gemMarge: function () {
+      let sum = 0
+      let aantalKlanten = 0
+      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
+      sum += this.methodData.klantresultaten[i].marge
+      aantalKlanten++
+      }
+      var avg = sum / aantalKlanten
+      return parseFloat(avg.toFixed(2))
+    },
+    gemConversieRatio: function () {
+      let sum = 0
+      let aantalKlanten = 0
+      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
+      sum += this.methodData.klantresultaten[i].conversieRatio
+      aantalKlanten++
+      }
+      var avg = sum / aantalKlanten
+      return parseFloat(avg.toFixed(2))
+    },
   },
-    components: {thirdCTA, doelgroepTag}
+  components: {thirdCTA, doelgroepTag, Result}
 
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
+.method{
+  margin-bottom: 24px;
+}
+
 .categorie{
   width: 40px;
   height: 40px;
@@ -92,9 +188,6 @@ export default {
   margin:0 16px 0 0;
 }
 
-.methodContent .el-button{
-  padding:0;
-}
 .specificaties{
   padding: 3px 0;
   text-align: center;
@@ -133,6 +226,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  text-decoration: none;
 }
 </style>
