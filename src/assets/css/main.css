@@ -2,35 +2,51 @@ body{
     background-color: hsl(210, 33%, 97%);
     font-family: "Space Grotesk";
     font-size: 16px;
-    line-height: 24px;
+    line-height: 1.5;
     margin: 0;
+    color: rgba(31,41,51,1);
 }
-.el-row{
 
+.main{
+    margin: 0 24px;
+  }
+
+.knoppen{
+    display: flex;
+    margin: 24px 24px 40px;
+}
+
+button{
+    cursor: pointer;
 }
 
 .menu .el-col{
     display: flex;
     align-items: center;
 }
-p{
-    font-size: 16px;
-    line-height: 24px;
+a{
+    color: rgba(31,41,51,1);
 }
-
+p{
+    margin: 0;
+}
 h2{
     font-size: 24px;
     font-weight: bold;
-    letter-spacing: 0px;
-    line-height: 30px;
-    margin:0;
+    line-height: 1.25;
+    margin: 0;
 }
 
 h4{
     font-size: 16px;
-    line-height: 24px;
+    line-height: 1.5;
     font-weight: bold;
     margin: 16px 0 0 16px;
+}
+
+label{
+    display: block;
+    font-weight: bold;
 }
 
 .card-bg {
@@ -40,11 +56,44 @@ h4{
     box-shadow: 0 0 1.5px 0 rgba(31,41,51,0.12), 0 1px 1px 0 rgba(31,41,51,0.24);
   }
 
+  .MethodCards{
+      margin-bottom: 24px;
+  }
+
+  .categoryTitle{
+      display: flex;
+  }
+
+  .categoryTitle h2{
+      margin-top:-0.1em;
+  }
+  .categoryTitle .subTitle{
+    margin-top:-0.4em;
+}
+
+.tags{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+.section{
+    margin: 24px 0 0;
+}
+
+.grey{
+    background-color: hsl(210, 33%, 97%);
+  }
   .menu-bg {
     padding: 16px 24px;
     background-color: #ffffff;
-    box-shadow: 0 0 1.5px 0 rgba(31,41,51,0.12), 0 1px 1px 0 rgba(31,41,51,0.24);
+    box-shadow: 0 0 1.5px 0 rgba(31,41,51,0.12), 0 1px 1px 0 rgba(31,41,51,0.12);
   }
+
+.icon{
+    line-height: 24;
+    font-size: 16px;
+}
 .iconMarginRight{
     margin:0 8px 0 0;
 }
@@ -59,6 +108,10 @@ h4{
 }
 .alignedRight{
     margin: 0 0 0 24px;
+}
+
+.pushRight{
+    margin-left: auto;
 }
 
 .logo{
