@@ -23,7 +23,7 @@ button{
 .thirdCTA{
   height: 48px;
   color: #1F2933;
-  background-color: none;
+  background-color: rgba(255, 255, 255, 0);
   font: inherit;
   font-weight: bold;
   display: flex;
