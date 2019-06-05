@@ -18,7 +18,7 @@
         </el-row>
         <el-row>
           <div class="section">
-            <p>{{methodData.discription}}</p>
+            <p>{{methodData.intro}}</p>
           </div>
         </el-row>
         <el-row class="section">
@@ -61,7 +61,7 @@
           </el-row>
           </el-row>
           <el-row class="section">
-            <router-link :to="{ name: 'DetailView', params: { methode: methodData }}"><thirdCTA>Bekijk details</thirdCTA></router-link>
+            <router-link :to="{ name: 'DetailView', params: { methodeNaam: methodData.title, methode: methodData }}"><thirdCTA>Bekijk details</thirdCTA></router-link>
 
             <!-- <router-link to="/DetailView"><thirdCTA>Bekijk details</thirdCTA></router-link>              -->
 
