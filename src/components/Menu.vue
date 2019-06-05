@@ -8,7 +8,7 @@
       <el-col :sm="6" :md="6" :lg="8"></el-col> <!-- For search bar -->
         <el-col :sm="10" :md="10" :lg="9" class="alignItemsRight">
             <slot name="MainCTA"></slot>
-             <SecondCTA class="alignedRight"><font-awesome-icon icon="user-circle" class="icon iconMarginRight"/>Test button</SecondCTA>
+            <slot name="SecondCTA"></slot>
             <thirdCTA class="alignedRight"><font-awesome-icon slot="Icon" icon="user-circle" class="icon iconMarginRight"/>Account</thirdCTA>
         </el-col>
     </el-row>
@@ -36,4 +36,3 @@ export default {
     margin-bottom: 24px
 }
 </style>
-
