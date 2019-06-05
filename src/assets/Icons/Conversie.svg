@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="12px" viewBox="0 0 19 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>round-filter_list-24px</title>
+    <desc>Created with Sketch.</desc>
+    <g id="High-fi-Prototype" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Detail-view" transform="translate(-676.000000, -502.000000)">
+            <g id="gem.-resultaten" transform="translate(649.000000, 192.000000)">
+                <g id="Group-10" transform="translate(0.000000, 296.000000)">
+                    <g id="Informatie-Kosten-Copy-3" transform="translate(24.000000, 8.000000)">
+                        <g id="Group-4">
+                            <g id="round-filter_list-24px">
+                                <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+                                <path d="M11.0737805,18 L13.0737805,18 C13.6237805,18 14.0737805,17.55 14.0737805,17 C14.0737805,16.6333333 14.049187,14.6333333 14,11 L10,11 C10.049187,14.6333333 10.0737805,16.6333333 10.0737805,17 C10.0737805,17.55 10.5237805,18 11.0737805,18 Z M3.07378049,7 C3.07378049,7.55 6.52378049,8 7.07378049,8 L18.5,8 C18.8934783,8 20.0412654,7.7696815 20.6626837,7.43720156 C20.9098775,7.30494445 21.0737805,7.15652165 21.0737805,7 C21.0737805,6.45 20.6237805,6 20.0737805,6 L4.07378049,6 C3.52378049,6 3.07378049,6.45 3.07378049,7 Z M11,14 L13,14 C13.55,14 21,8 21.0737805,7 L3.07378049,7 C3,8 10.45,14 11,14 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
