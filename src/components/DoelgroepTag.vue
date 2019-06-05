@@ -23,7 +23,7 @@ export default {
   border: 1px solid rgba(228,232,235,1);
   align-items: center;
   text-align: center;
-  padding: 4px 16px;
+  padding: 0px 16px;
   margin: 8px 8px 0 0;
   font-size: 16px;
   line-height: 1.5;
