@@ -169,7 +169,7 @@ export default {
       }
       var avg = sum / aantalKlanten
       return parseFloat(avg.toFixed(2))
-    },
+    }
   },
   components: {thirdCTA, doelgroepTag, Result}
 
