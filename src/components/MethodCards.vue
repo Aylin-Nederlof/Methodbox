@@ -4,7 +4,7 @@
       <div class="method card-bg">
         <el-row>
           <el-col :span="20">
-            <router-link to="/DetailView">
+            <router-link :to="{ name: 'DetailView', params: {methodeID: methodData.id, methodeNaam: methodData.title, methode: methodData }}">
               <div class="categoryTitle">
                 <div class="categorie" v-bind:style="{ backgroundColor: categorieKleur }"></div>
                 <div>
@@ -34,34 +34,34 @@
               <Result>
                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/ROI.svg" alt="">
                 <div slot="Key" class="subTitle">ROI</div>
-                <div slot="Value" class="subTitle">{{gemROI}}%</div>
+                <div slot="Value" class="subTitle">{{getAverage('ROI')}}%</div>
               </Result>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="12">
               <Result>
                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Doorlooptijd.svg" alt="">
                 <div slot="Key" class="subTitle">Doorloop tijd</div>
-                <div slot="Value" class="subTitle">{{gemDoorlooptijd}}d</div>
+                <div slot="Value" class="subTitle">{{getAverage('doorlooptijd')}}d</div>
               </Result>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="12">
               <Result >
                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Implementatietijd.svg" alt="">
                 <div slot="Key" class="subTitle">Impl. tijd</div>
-                <div slot="Value" class="subTitle">{{gemImplementatietijd}}u</div>
+                <div slot="Value" class="subTitle">{{getAverage('implementatietijd')}}u</div>
               </Result>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="12">
               <Result>
                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Kosten.svg" alt="">
                 <div slot="Key" class="subTitle">Kosten</div>
-                <div slot="Value" class="subTitle">€ {{gemKosten}}</div>
+                <div slot="Value" class="subTitle">€ {{getAverage('kosten')}}</div>
               </Result>
           </el-col>
           </el-row>
           </el-row>
           <el-row class="section">
-            <router-link :to="{ name: 'DetailView', params: { methodeNaam: methodData.title, methode: methodData }}"><thirdCTA>Bekijk details</thirdCTA></router-link>
+            <router-link :to="{ name: 'DetailView', params: {methodeID: methodData.id, methodeNaam: methodData.title, methode: methodData }}"><thirdCTA>Bekijk details</thirdCTA></router-link>
 
             <!-- <router-link to="/DetailView"><thirdCTA>Bekijk details</thirdCTA></router-link>              -->
 
@@ -83,6 +83,23 @@ export default {
 
     }
   },
+  methods: {
+      getAverage: function (name, decimalPlaces) {
+          let sum = 0
+          let results = this.methodData.klantresultaten
+          let divider = results.length
+          for (let i = 0; i < divider; i++) sum += results[i][name]
+
+          decimalPlaces = Math.floor(decimalPlaces || 0)
+          if (decimalPlaces) {
+              let avg = '0'.repeat(decimalPlaces) + Math.round(sum / divider * Math.pow(10, decimalPlaces))
+              console.log(avg)
+              return parseFloat(avg.slice(0, decimalPlaces * -1) + '.' + avg.slice(decimalPlaces * -1))
+          } else {
+              return Math.round(sum / divider)
+          }
+      }
+  },
   computed: {
     categorieKleur: function () {
       var kleur = ''
@@ -95,80 +112,9 @@ export default {
       } else if (this.methodData.category === 'fullfil') {
         kleur = 'rgba(255,213,0,1)'
       } else {
-        kleur = 'deze'
+        kleur = 'rgba(228,232,235,1)'
       }
       return kleur
-    },
-    
-    gemOpbrengsten: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
-      sum += this.methodData.klantresultaten[i].Opbrengsten
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(2))
-    },
-    gemROI: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
-      sum += this.methodData.klantresultaten[i].ROI
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(0))
-    },
-    gemImplementatietijd: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
-      sum += this.methodData.klantresultaten[i].implementatietijd
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(0))
-    },
-    gemDoorlooptijd: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
-      sum += this.methodData.klantresultaten[i].doorlooptijd
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(0))
-    },
-    gemKosten: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
-      sum += this.methodData.klantresultaten[i].kosten
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(2))
-    },
-    gemMarge: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
-      sum += this.methodData.klantresultaten[i].marge
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(2))
-    },
-    gemConversieRatio: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methodData.klantresultaten.length; i++) {
-      sum += this.methodData.klantresultaten[i].conversieRatio
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(2))
     }
   },
   components: {thirdCTA, doelgroepTag, Result}
