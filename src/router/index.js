@@ -19,7 +19,7 @@ export default new Router({
       component: Home
     },
     {
-      path: 'DetailView/:methodeNaam',
+      path: 'DetailView/:methodeID/:methodeNaam',
       name: 'DetailView',
       component: DetailView,
       props: true,
