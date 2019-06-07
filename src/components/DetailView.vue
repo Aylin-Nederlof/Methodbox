@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 <template>
     <div class="wrapper">
         <Menu>
@@ -45,10 +47,8 @@
                         <el-col :span="12"><label> Klant resultaten ({{methode.timesUsed}}):</label></el-col>
                         
                         <el-col :span="12" class="alignItemsRight">
-                            <select v-model="currentOrder" class="alignedRight sorteer">
-                                <option value="naam">Sorteer op naam</option>
-                                <option value="kosten">Sorteer op kosten</option>
-                                <option value="ROI">Sorteer op ROI</option>
+                            <select v-model="selected" class="alignedRight sorteer">
+                                <option v-for="(option, key) in sortingOptions" :key="key" v-bind:value="option.order.name + '_' + option.order.direction">{{ option.text }}</option>
                             </select>
                         </el-col>
                         </div>
@@ -67,49 +67,49 @@
                             <Result class="grey">
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/ROI.svg" alt="">
                                 <div slot="Key" class="subTitle">ROI</div>
-                                <div slot="Value" class="subTitle">{{gemROI}}%</div>
+                                <div slot="Value" class="subTitle">{{getAverage('ROI')}}%</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result>
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Opbrengsten.svg" alt="">
                                 <div slot="Key" class="subTitle">Opbrengsten</div>
-                                <div slot="Value" class="subTitle">€ {{gemOpbrengsten}}</div>
+                                <div slot="Value" class="subTitle">€ {{getAverage('Opbrengsten', 2)}}</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result class="grey">
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Doorlooptijd.svg" alt="">
                                 <div slot="Key" class="subTitle">Doorloop tijd</div>
-                                <div slot="Value" class="subTitle">{{gemDoorlooptijd}}d</div>
+                                <div slot="Value" class="subTitle">{{getAverage('doorlooptijd')}}d</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result>
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/implementatietijd.svg" alt="">
                                 <div slot="Key" class="subTitle">Impl. tijd</div>
-                                <div slot="Value" class="subTitle">{{gemImplementatietijd}}u</div>
+                                <div slot="Value" class="subTitle">{{getAverage('implementatietijd')}}u</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result class="grey">
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Kosten.svg" alt="">
                                 <div slot="Key" class="subTitle">Kosten</div>
-                                <div slot="Value" class="subTitle">€ {{gemKosten}}</div>
+                                <div slot="Value" class="subTitle">€ {{getAverage('kosten', 2)}}</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result>
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Marge.svg" alt="">
                                 <div slot="Key" class="subTitle">Marge</div>
-                                <div slot="Value" class="subTitle">{{gemMarge}}%</div>
+                                <div slot="Value" class="subTitle">{{getAverage('marge')}}%</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result class="grey">
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Conversie.svg" alt="">
                                 <div slot="Key" class="subTitle">Conversie ratio</div>
-                                <div slot="Value" class="subTitle">{{gemConversieRatio}}%</div>
+                                <div slot="Value" class="subTitle">{{getAverage('conversieRatio')}}%</div>
                             </Result>
                         </el-col>
                         </el-row>
@@ -130,118 +130,59 @@ import Result from './Result.vue'
 import KlantResultaat from './KlantResultaat.vue'
 import _ from 'lodash'
 
-
     export default {
         name: 'DetailView',
         props: ['methode'],
         data () {
             return {
                 msg: 'bla',
-                currentOrder:'naam'
+                selected: 'naam_asc',
+                sortingOptions: {
+                    naam_asc:    { order: { name: 'naam',   direction: 'asc'  }, text: 'Sorteer op naam'},
+                    kosten_asc:  { order: { name: 'kosten', direction: 'asc'  }, text: 'kosten - laag naar hoog'},
+                    kosten_desc: { order: { name: 'kosten', direction: 'desc' }, text: 'kosten - hoog naar laag'},
+                    ROI_asc:     { order: { name: 'ROI',    direction: 'asc'  }, text: 'ROI - laag naar hoog'},
+                    ROI_desc:    { order: { name: 'ROI',    direction: 'desc' }, text: 'ROI - hoog naar laag'}
+                }
             }
         },
         methods: {
-        toggleOrder(currentOrder) {
-            this.currentOrder = currentOrder;
-        }
-         },
-    computed: {
-    OrderedResults: function () {
-        
-        console.log(this.currentOrder)
-        if(this.currentOrder === 'naam'){
-            return _.sortBy(this.methode.klantresultaten, this.currentOrder)
-        }
-        else{
-            return _.orderBy(this.methode.klantresultaten, [this.currentOrder], ['desc'])
-        }
-    },
-    categorieKleur: function () {
-      var kleur = ''
-      if (this.methode.category === 'focus') {
-        kleur = 'rgba(218,0,255,1)'
-      } else if (this.methode.category === 'visibility') {
-        kleur = 'rgba(255,0,91,1)'
-      } else if (this.methode.category === 'transfer') {
-        kleur = 'rgba(0,176,255,1)'
-      } else if (this.methode.category === 'fullfil') {
-        kleur = 'rgba(255,213,0,1)'
-      } else {
-        kleur = 'deze'
-      }
-      return kleur
-    },
-    gemOpbrengsten: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methode.klantresultaten.length; i++) {
-      sum += this.methode.klantresultaten[i].Opbrengsten
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(2))
-    },
-    gemROI: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methode.klantresultaten.length; i++) {
-      sum += this.methode.klantresultaten[i].ROI
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(0))
-    },
-    gemImplementatietijd: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methode.klantresultaten.length; i++) {
-      sum += this.methode.klantresultaten[i].implementatietijd
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(0))
-    },
-    gemDoorlooptijd: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methode.klantresultaten.length; i++) {
-      sum += this.methode.klantresultaten[i].doorlooptijd
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(0))
-    },
-    gemKosten: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methode.klantresultaten.length; i++) {
-      sum += this.methode.klantresultaten[i].kosten
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(2))
-    },
-    gemMarge: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methode.klantresultaten.length; i++) {
-      sum += this.methode.klantresultaten[i].marge
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(2))
-    },
-    gemConversieRatio: function () {
-      let sum = 0
-      let aantalKlanten = 0
-      for (let i = 0; i < this.methode.klantresultaten.length; i++) {
-      sum += this.methode.klantresultaten[i].conversieRatio
-      aantalKlanten++
-      }
-      var avg = sum / aantalKlanten
-      return parseFloat(avg.toFixed(2))
-    }
-    },
+            getAverage: function  (name, decimalPlaces) {
+                let sum = 0
+                let results = this.methode.klantresultaten
+                let divider = results.length
+                for (let i = 0; i < divider; i++) sum += results[i][name]
+
+                decimalPlaces = Math.floor(decimalPlaces || 0)
+                if (decimalPlaces) {
+                    let avg = '0'.repeat(decimalPlaces) + Math.round(sum / divider * Math.pow(10, decimalPlaces))
+                    return parseFloat(avg.slice(0, decimalPlaces * -1) + '.' + avg.slice(decimalPlaces * -1))
+                } else {
+                    return Math.round(sum / divider)
+                }
+            }
+        },
+        computed: {
+            OrderedResults: function () {
+                var selected = this.sortingOptions[this.selected]
+                return _.orderBy(this.methode.klantresultaten, selected.order.name, selected.order.direction)
+            },
+            categorieKleur: function () {
+            var kleur = ''
+            if (this.methode.category === 'focus') {
+                kleur = 'rgba(218,0,255,1)'
+            } else if (this.methode.category === 'visibility') {
+                kleur = 'rgba(255,0,91,1)'
+            } else if (this.methode.category === 'transfer') {
+                kleur = 'rgba(0,176,255,1)'
+            } else if (this.methode.category === 'fullfil') {
+                kleur = 'rgba(255,213,0,1)'
+            } else {
+                kleur = 'deze'
+            }
+            return kleur
+            }
+        },
         components: {MainCTA, SecondCTA, thirdCTA, Menu, doelgroepTag, Result, KlantResultaat}
     }
 </script>
@@ -267,6 +208,7 @@ import _ from 'lodash'
    
    .klantresultaten{
        display: flex;
+       align-items: center;
        margin: 16px 0 40px;
    }
 
