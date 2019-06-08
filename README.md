@@ -1,5 +1,5 @@
 # Methodbox
-Methodbox is een systeem dat no.sots helpt bij het opslaan, vergelijken en kiezen van methoden die zij gebruiken om klanten te helpen met hun vraag. Methodbox is gemaakt binnen een afstudeer project van Aylin Nederlof bij het bedrijf [no.dots](https://www.nodots.nl/) voor de opleiding [HBO ICT & Media Design](https://fontys.nl/hbo-ict/)
+Methodbox is een systeem dat no.dots helpt bij het opslaan, vergelijken en kiezen van methoden die zij gebruiken om klanten te helpen met hun vraag. Methodbox is gemaakt binnen een afstudeer project van Aylin Nederlof bij het bedrijf [no.dots](https://www.nodots.nl/) voor de opleiding [HBO ICT & Media Design](https://fontys.nl/hbo-ict/)
 
 ## Installatie
 1. Controleer of je node.js en npm geïnstalleerd hebt op je computer. 
@@ -47,6 +47,8 @@ Voor het ontwikkelen kan gebuik gemaakt worden van een code editor. Voor het ini
 * [Vue.js](https://vuejs.org/) - Javascript framework
 
 * [Element](https://element.eleme.io/#/en-US) - a Vue 2.0 based component library.
+
+* [Lodash](https://lodash.com/) - A modern JavaScript utility library
 
 ## Auteur
 *Initial work* by Aylin Nederlof - [Github](https://github.com/Aylin-Nederlof/Methodbox)
