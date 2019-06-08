@@ -8,9 +8,27 @@
         <el-col :sm="24" :md="24">
         <MethodFilter></MethodFilter>
         </el-col>
+        <el-col :sm="24" :md="24">
+        <el-row>
+            <el-col :span="12" class="section">
+              <select class="sorteer">
+                    <option value="Actief">Actieve methoden</option>
+                    <option value="Gearchiveerde">Gearchiveerde methoden</option>
+                    <option value="Alles">Alle methoden</option>
+                </select>
+            </el-col>
+            <el-col :span="12" class="alignItemsRight section">
+              <div class="subTitle"> <b>....</b> passende methoden gevonden</div>
+                <select v-model="currentOrder" class="alignedRight sorteer">
+                    <option value="gemKosten">Sorteer op kosten</option>
+                    <option value="gemROI">Sorteer op ROI</option>
+                </select>
+            </el-col>
+          </el-row> 
+          </el-col>
           <el-col :sm="24" :md="24">
               <el-row class="methods" :gutter="24" >
-                <div v-for="method in methods" :key="method.id">
+                <div v-for="method in OrderedResults" :key="method.id">
                   <MethodCards :methodData="method"></MethodCards>
                 </div>
               </el-row>
@@ -36,6 +54,7 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       checked: true,
+      currentOrder:'gemROI',
       methods: [
         { id: 1,
           title: 'test methode',
@@ -145,7 +164,7 @@ export default {
           },
           {
             naam: 'klant',
-            ROI: 110, // in percentage
+            ROI: 200, // in percentage
             Opbrengsten: 200, // in euro's
             marge: 21, // in percentage
             conversieRatio: 21, // in percentage
@@ -157,6 +176,35 @@ export default {
       ]
     }
   },
+        methods: {
+        toggleOrder(currentOrder) {
+            this.currentOrder = currentOrder;
+        },
+        getAverage: function  (name, decimalPlaces) {
+                let sum = 0
+                let results = this.methods.klantresultaten
+                let divider = results.length
+                for (let i = 0; i < divider; i++) sum += results[i][name]
+
+                decimalPlaces = Math.floor(decimalPlaces || 0)
+                if (decimalPlaces) {
+                    let avg = '0'.repeat(decimalPlaces) + Math.round(sum / divider * Math.pow(10, decimalPlaces))
+                    console.log(avg)
+                    return parseFloat(avg.slice(0, decimalPlaces * -1) + '.' + avg.slice(decimalPlaces * -1))
+                } else {
+                    return Math.round(sum / divider)
+                }
+            }
+         },
+    computed: {
+    OrderedResults: function () {
+        
+        console.log(this.currentOrder)
+       
+            return _.orderBy(this.methods, [this.currentOrder])
+        
+    }
+    },
   components: {MethodCards, MethodFilter, MainCTA, SecondCTA, thirdCTA, Menu, doelgroepTag, Result}
 }
 </script>
@@ -173,7 +221,10 @@ export default {
   margin: 0 auto;
 }
 }
-
+.section{
+  display: flex;
+  align-items: center;
+}
 
 .methods{
   margin: 56px 0;
