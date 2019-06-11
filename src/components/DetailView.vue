@@ -52,10 +52,12 @@
                             </select>
                         </el-col>
                         </div>
-                     </el-row>                    
+                     </el-row>         
+
                     <el-row v-for="klantResultaat in OrderedResults" :key="klantResultaat.naam">
                         <klantResultaat :klantResultaatData="klantResultaat"></klantResultaat>
                     </el-row>
+
                     <!-- <p v-for="klantResultaat in orderedUsers" :key="klantResultaat.naam">test</p> -->
 
                 </el-col>
@@ -137,6 +139,7 @@ import _ from 'lodash'
             return {
                 msg: 'bla',
                 selected: 'naam_asc',
+
                 sortingOptions: {
                     naam_asc:    { order: { name: 'naam',   direction: 'asc'  }, text: 'Sorteer op naam'},
                     kosten_asc:  { order: { name: 'kosten', direction: 'asc'  }, text: 'kosten - laag naar hoog'},
@@ -144,6 +147,7 @@ import _ from 'lodash'
                     ROI_asc:     { order: { name: 'ROI',    direction: 'asc'  }, text: 'ROI - laag naar hoog'},
                     ROI_desc:    { order: { name: 'ROI',    direction: 'desc' }, text: 'ROI - hoog naar laag'}
                 }
+                
             }
         },
         methods: {
@@ -163,10 +167,12 @@ import _ from 'lodash'
             }
         },
         computed: {
+
             OrderedResults: function () {
                 var selected = this.sortingOptions[this.selected]
                 return _.orderBy(this.methode.klantresultaten, selected.order.name, selected.order.direction)
             },
+            
             categorieKleur: function () {
             var kleur = ''
             if (this.methode.category === 'focus') {

@@ -83,6 +83,7 @@ export default {
 
     }
   },
+
   methods: {
       getAverage: function (name, decimalPlaces) {
           let sum = 0
@@ -99,6 +100,7 @@ export default {
               return Math.round(sum / divider)
           }
       }
+
   },
   computed: {
     categorieKleur: function () {
@@ -116,6 +118,8 @@ export default {
       }
       return kleur
     }
+
+    
   },
   components: {thirdCTA, doelgroepTag, Result}
 

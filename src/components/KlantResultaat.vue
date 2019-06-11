@@ -31,11 +31,13 @@
         </Result>
     </el-col>
      <el-col :xs="24" :sm="12" :md="12" :lg="12">
+
         <Result class="grey">
             <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Doorlooptijd.svg" alt="">
             <div slot="Key" class="subTitle">Doorlooptijd</div>
             <div slot="Value" class="subTitle">{{klantResultaatData.doorlooptijd}}d</div>
         </Result>
+   
     </el-col>
     <el-col :xs="24" :sm="12" :md="12" :lg="12">
         <Result>
