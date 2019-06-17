@@ -1,9 +1,9 @@
 /* eslint-disable */
-
 <template>
     <div class="wrapper">
         <Menu>
-            <SecondCTA slot="SecondCTA" class="alignedRight"><font-awesome-icon icon="plus" class="icon iconMarginRight"/>Methode toevoegen</SecondCTA>
+            <router-link slot="SecondCTA" to="/addMethodForm"><SecondCTA class="alignedRight"><font-awesome-icon icon="plus" class="icon iconMarginRight"/>Methode toevoegen</SecondCTA></router-link>
+            
         </Menu>
         <el-row  class="knoppen">
             <el-col :sm="4" :md="4">
@@ -134,7 +134,6 @@ import _ from 'lodash'
 
     export default {
         name: 'DetailView',
-        props: ['methode'],
         data () {
             return {
                 msg: 'bla',
@@ -167,12 +166,24 @@ import _ from 'lodash'
             }
         },
         computed: {
+            methode () {
+                let methods = this.$store.state.methods
 
+                for (let no in methods){
+                    if(methods[no].id == this.methodID){
+                        return methods[no]
+                    }
+                }
+
+                return 'none'
+            },
             OrderedResults: function () {
                 var selected = this.sortingOptions[this.selected]
                 return _.orderBy(this.methode.klantresultaten, selected.order.name, selected.order.direction)
             },
-            
+            methodID () {
+                return this.$route.params.methodeID;
+            },
             categorieKleur: function () {
             var kleur = ''
             if (this.methode.category === 'focus') {

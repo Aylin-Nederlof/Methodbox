@@ -1,8 +1,10 @@
+/* eslint-disable */ 
 <template>
 <div class="menu">
   <el-row type="flex"  class="menu-bg" justify="space-between" align="middle">
       <el-col :sm="8" :md="8" :lg="7">
-        <img class="logo" src="../assets/logo.png">
+          <router-link to="/home"><img class="logo" src="../assets/logo.png"></router-link>
+        
         <h4>Methodbox</h4>
       </el-col>
       <el-col :sm="6" :md="6" :lg="8"></el-col> <!-- For search bar -->

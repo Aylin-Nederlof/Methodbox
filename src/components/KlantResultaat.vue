@@ -37,7 +37,7 @@
             <div slot="Key" class="subTitle">Doorlooptijd</div>
             <div slot="Value" class="subTitle">{{klantResultaatData.doorlooptijd}}d</div>
         </Result>
-   
+
     </el-col>
     <el-col :xs="24" :sm="12" :md="12" :lg="12">
         <Result>
@@ -100,8 +100,4 @@ export default {
        padding: 0 24px 16px;
    }
 
-  
-
-
-   
 </style>

@@ -9,6 +9,7 @@ import { faClock, faPercentage, faRecycle, faEuroSign, faPlus, faUserCircle } fr
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import App from './App'
 import router from './router'
+import store from './store/store'
 
 library.add(faPercentage, faClock, faRecycle, faEuroSign, faPlus, faUserCircle)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -21,7 +22,9 @@ Vue.use(ElementUI)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'
+  
 })

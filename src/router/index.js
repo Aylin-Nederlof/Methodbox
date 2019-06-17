@@ -1,8 +1,10 @@
+
 import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 import Home from '@/components/Home'
 import DetailView from '@/components/DetailView'
+import addMethodForm from '@/components/addMethodForm'
 
 Vue.use(Router)
 
@@ -19,10 +21,14 @@ export default new Router({
       component: Home
     },
     {
-      path: 'DetailView/:methodeID/:methodeNaam',
+      path: '/DetailView/:methodeID/:methodeNaam',
       name: 'DetailView',
       component: DetailView,
-      props: true,
-    }
+    },
+    {
+      path: '/addMethodForm',
+      name: 'addMethodForm',
+      component: addMethodForm
+    },
   ]
 })

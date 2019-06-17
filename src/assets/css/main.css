@@ -50,6 +50,8 @@ button{
 }
 a{
     color: rgba(31,41,51,1);
+    text-decoration: none;
+    cursor: pointer;
 }
 p{
     margin: 0;

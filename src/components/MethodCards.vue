@@ -4,7 +4,7 @@
       <div class="method card-bg">
         <el-row>
           <el-col :span="20">
-            <router-link :to="{ name: 'DetailView', params: {methodeID: methodData.id, methodeNaam: methodData.title, methode: methodData }}">
+            <router-link :to="{ name: 'DetailView', params: {methodeID: methodData.id, methodeNaam: methodData.title }}">
               <div class="categoryTitle">
                 <div class="categorie" v-bind:style="{ backgroundColor: categorieKleur }"></div>
                 <div>
