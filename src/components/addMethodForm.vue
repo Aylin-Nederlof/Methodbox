@@ -231,7 +231,7 @@ form{
     display: flex;
     /* flex-wrap: nowrap; */
     /* justify-content: center; */
-    margin: 24px;
+    margin: 40px 24px;
     /* width: 96%; */
 }
 .annuleren{
@@ -286,4 +286,17 @@ label.el-radio{
     padding: 0;
     display: flex;
 }
+
+@media only screen and (max-width: 1100px) {
+    .el-dialog{
+        width: 50% !important;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .el-dialog{
+        width: 90% !important;
+    }
+}
+
 </style>

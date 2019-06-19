@@ -241,7 +241,7 @@ export default {
     display: flex;
     /* flex-wrap: nowrap; */
     /* justify-content: center; */
-    margin: 24px;
+    margin: 40px 24px;
     /* width: 96%; */
 }
 .annuleren{

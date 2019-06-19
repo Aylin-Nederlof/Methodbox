@@ -153,12 +153,6 @@ const store = new Vuex.Store({
     // }
   },
   mutations: {
-    increment (state) {
-      state.count++
-    },
-    incrementBy (state, payload) {
-      state.count += payload.amount
-    },
     calculateAverages: function (state) {
       
       for(const method of state.methods){ // Loop door alle methodes heen
