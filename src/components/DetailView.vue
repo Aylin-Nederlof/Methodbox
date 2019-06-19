@@ -10,7 +10,8 @@
             <router-link to="/Home"><thirdCTA>Terug naar overzicht</thirdCTA></router-link>
             </el-col>
             <el-col :sm="20" :md="20" class="alignItemsRight">
-            <router-link to="#"><thirdCTA class="alignedRight"><img class="iconMarginRight" slot="Icon" src="../assets/Icons/edit.svg" alt="">Bewerk</thirdCTA></router-link>
+
+            <router-link :to="{ name: 'editMethodForm', params: {methodeID: methode.id, methodeNaam: methode.title }}"><thirdCTA class="alignedRight"><img class="iconMarginRight" slot="Icon" src="../assets/Icons/edit.svg" alt="">Bewerk</thirdCTA></router-link>
             <router-link to="#"><thirdCTA class="alignedRight"><img class="iconMarginRight" src="../assets/Icons/archive.svg" alt="">Archiveer</thirdCTA></router-link>
             <router-link to="#"><MainCTA class="alignedRight"><img class="iconMarginRight" src="../assets/Icons/plusWhite.svg" alt="">Voeg resultaat toe</MainCTA></router-link>
             <router-link to="#"><SecondCTA class="alignedRight"><img class="iconMarginRight" src="../assets/Icons/present.svg" alt="">Presentatie modus</SecondCTA></router-link>
@@ -29,7 +30,7 @@
                                 <div class="categorie" v-bind:style="{ backgroundColor: categorieKleur }"></div>
                                 <div>
                                 <h2>{{methode.title}}</h2>
-                                <div class="subTitle">{{methode.category}} - {{methode.subCategory}}</div>
+                                <div  v-for="(subCategory, index) in methode.subCategory" :key="`subCategory-${index}`" class="subTitle">{{methode.category}} - {{subCategory}}</div>
                                 </div>
                             </div>
                         </el-col>
@@ -76,7 +77,7 @@
                             <Result>
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Opbrengsten.svg" alt="">
                                 <div slot="Key" class="subTitle">Opbrengsten</div>
-                                <div slot="Value" class="subTitle">€ {{getAverage('Opbrengsten', 2)}}</div>
+                                <div slot="Value" class="subTitle">€ {{getAverage('Opbrengsten')}}</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
@@ -97,7 +98,7 @@
                             <Result class="grey">
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Kosten.svg" alt="">
                                 <div slot="Key" class="subTitle">Kosten</div>
-                                <div slot="Value" class="subTitle">€ {{getAverage('kosten', 2)}}</div>
+                                <div slot="Value" class="subTitle">€ {{getAverage('kosten')}}</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
@@ -140,8 +141,8 @@ import _ from 'lodash'
                 selected: 'naam_asc',
 
                 sortingOptions: {
-                    naam_asc:    { order: { name: 'naam',   direction: 'asc'  }, text: 'Sorteer op naam'},
-                    kosten_asc:  { order: { name: 'kosten', direction: 'asc'  }, text: 'kosten - laag naar hoog'},
+                    naam_asc:    { order: { name: 'naam',   object: 'naam', direction: 'asc'  }, text: 'Sorteer op naam'},
+                    kosten_asc:  { order: { name: 'kosten', object: 'data.kosten', direction: 'asc'  }, text: 'kosten - laag naar hoog'},
                     kosten_desc: { order: { name: 'kosten', direction: 'desc' }, text: 'kosten - hoog naar laag'},
                     ROI_asc:     { order: { name: 'ROI',    direction: 'asc'  }, text: 'ROI - laag naar hoog'},
                     ROI_desc:    { order: { name: 'ROI',    direction: 'desc' }, text: 'ROI - hoog naar laag'}
@@ -150,26 +151,15 @@ import _ from 'lodash'
             }
         },
         methods: {
-            getAverage: function  (name, decimalPlaces) {
-                let sum = 0
-                let results = this.methode.klantresultaten
-                let divider = results.length
-                for (let i = 0; i < divider; i++) sum += results[i][name]
-
-                decimalPlaces = Math.floor(decimalPlaces || 0)
-                if (decimalPlaces) {
-                    let avg = '0'.repeat(decimalPlaces) + Math.round(sum / divider * Math.pow(10, decimalPlaces))
-                    return parseFloat(avg.slice(0, decimalPlaces * -1) + '.' + avg.slice(decimalPlaces * -1))
-                } else {
-                    return Math.round(sum / divider)
-                }
+            getAverage (name) {
+                return this.methode["gem" + name]
             }
         },
         computed: {
             methode () {
                 let methods = this.$store.state.methods
 
-                for (let no in methods){
+                for (var no in methods){
                     if(methods[no].id == this.methodID){
                         return methods[no]
                     }
@@ -177,27 +167,27 @@ import _ from 'lodash'
 
                 return 'none'
             },
-            OrderedResults: function () {
+            categorieKleur: function () {
+                var kleur = ''
+                if (this.methode.category === 'Focus') {
+                    kleur = 'rgba(218,0,255,1)'
+                } else if (this.methode.category === 'Visibility') {
+                    kleur = 'rgba(255,0,91,1)'
+                } else if (this.methode.category === 'Transfer') {
+                    kleur = 'rgba(0,176,255,1)'
+                } else if (this.methode.category === 'Fullfil') {
+                    kleur = 'rgba(255,213,0,1)'
+                } else {
+                    kleur = 'rgba(228,232,235,1)'
+                }
+                return kleur
+            },
+            OrderedResults () {
                 var selected = this.sortingOptions[this.selected]
-                return _.orderBy(this.methode.klantresultaten, selected.order.name, selected.order.direction)
+                return _.orderBy(this.methode.klantresultaten, selected.order.object, selected.order.direction)
             },
             methodID () {
                 return this.$route.params.methodeID;
-            },
-            categorieKleur: function () {
-            var kleur = ''
-            if (this.methode.category === 'focus') {
-                kleur = 'rgba(218,0,255,1)'
-            } else if (this.methode.category === 'visibility') {
-                kleur = 'rgba(255,0,91,1)'
-            } else if (this.methode.category === 'transfer') {
-                kleur = 'rgba(0,176,255,1)'
-            } else if (this.methode.category === 'fullfil') {
-                kleur = 'rgba(255,213,0,1)'
-            } else {
-                kleur = 'deze'
-            }
-            return kleur
             }
         },
         components: {MainCTA, SecondCTA, thirdCTA, Menu, doelgroepTag, Result, KlantResultaat}

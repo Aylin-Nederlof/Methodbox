@@ -9,7 +9,7 @@
                 <div class="categorie" v-bind:style="{ backgroundColor: categorieKleur }"></div>
                 <div>
                   <h2>{{methodData.title}}</h2>
-                  <div class="subTitle">{{methodData.category}} - {{methodData.subCategory}}</div>
+                  <div v-for="(subCategory, index) in methodData.subCategory" :key="`subCategory-${index}`" class="subTitle">{{methodData.category}} - {{subCategory}}</div>
                 </div>
               </div>
             </router-link>
@@ -85,33 +85,21 @@ export default {
   },
 
   methods: {
-      getAverage: function (name, decimalPlaces) {
-          let sum = 0
-          let results = this.methodData.klantresultaten
-          let divider = results.length
-          for (let i = 0; i < divider; i++) sum += results[i][name]
-
-          decimalPlaces = Math.floor(decimalPlaces || 0)
-          if (decimalPlaces) {
-              let avg = '0'.repeat(decimalPlaces) + Math.round(sum / divider * Math.pow(10, decimalPlaces))
-              console.log(avg)
-              return parseFloat(avg.slice(0, decimalPlaces * -1) + '.' + avg.slice(decimalPlaces * -1))
-          } else {
-              return Math.round(sum / divider)
-          }
+      getAverage (name) {
+        return this.methodData["gem" + name]
       }
 
   },
   computed: {
     categorieKleur: function () {
       var kleur = ''
-      if (this.methodData.category === 'focus') {
+      if (this.methodData.category === 'Focus') {
         kleur = 'rgba(218,0,255,1)'
-      } else if (this.methodData.category === 'visibility') {
+      } else if (this.methodData.category === 'Visibility') {
         kleur = 'rgba(255,0,91,1)'
-      } else if (this.methodData.category === 'transfer') {
+      } else if (this.methodData.category === 'Transfer') {
         kleur = 'rgba(0,176,255,1)'
-      } else if (this.methodData.category === 'fullfil') {
+      } else if (this.methodData.category === 'Fullfil') {
         kleur = 'rgba(255,213,0,1)'
       } else {
         kleur = 'rgba(228,232,235,1)'

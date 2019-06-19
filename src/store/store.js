@@ -8,15 +8,16 @@ const store = new Vuex.Store({
     methods: [
       { id: 1,
         title: 'test methode',
-        category: 'transfer',
-        subCategory: 'Email',
+        category: 'Transfer',
+        subCategory: ['Email'],
         beschrijving: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
-        intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas faucibus mollis interdum.',
+        intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, non commodo luctus.',
         timesUsed: 6,
-        doelgroep: ['Doelgroep 1', 'Doelgroep 2'],
+        expertise: ['lolbroek', 'tester'],
+        doelgroep: ['Doelgroeep 1', 'Doelgrooep 2'],
         klantresultaten: [
           {
-            naam: 'Klant',
+            naam: 'Klant 1',
             data: {
               ROI: 123, // in percentage
               Opbrengsten: 400, // in euro's
@@ -27,7 +28,7 @@ const store = new Vuex.Store({
               kosten: 419 // in euro's
             }
           }, {
-            naam: 'Klant',
+            naam: 'Klant 2',
             data: {
               ROI: 91, // in percentage
               Opbrengsten: 300, // in euro's
@@ -38,7 +39,7 @@ const store = new Vuex.Store({
               kosten: 387 // in euro's
             }
           }, {
-            naam: 'klant',
+            naam: 'klant 3',
             data: {
               ROI: 200, // in percentage
               Opbrengsten: 200, // in euro's
@@ -53,15 +54,16 @@ const store = new Vuex.Store({
       },
       { id: 2,
         title: 'Methodetje',
-        category: 'visibility',
-        subCategory: 'Instagram',
+        category: 'Visibility',
+        subCategory: ['Instagram'],
         beschrijving: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
-        intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas faucibus mollis interdum.',
+        intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, non commodo luctus.',
         timesUsed: 6,
-        doelgroep: ['Doelgroep 1', 'Doelgroep 2'],
+        expertise: ['Designerjes', 'programmeur'],
+        doelgroep: ['doelgroep', 'Doelgroepert 2'],
         klantresultaten: [
           {
-            naam: 'Klant',
+            naam: 'Klant 4',
             data: {
               ROI: 123, // in percentage
               Opbrengsten: 400, // in euro's
@@ -72,7 +74,7 @@ const store = new Vuex.Store({
               kosten: 419 // in euro's
             }
           }, {
-            naam: 'Klant',
+            naam: 'Klant 5',
             data: {
               ROI: 91, // in percentage
               Opbrengsten: 300, // in euro's
@@ -83,7 +85,7 @@ const store = new Vuex.Store({
               kosten: 387 // in euro's
             }
           }, {
-            naam: 'klant',
+            naam: 'klant 6',
             data: {
               ROI: 200, // in percentage
               Opbrengsten: 200, // in euro's
@@ -98,15 +100,16 @@ const store = new Vuex.Store({
       },
       { id: 3,
         title: 'Nummertje 3',
-        category: 'focus',
-        subCategory: 'Persona\'s',
+        category: 'Focus',
+        subCategory: ['Persona\'s'],
         beschrijving: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
-        intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas faucibus mollis interdum.',
+        intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, non commodo luctus.',
         timesUsed: 6,
-        doelgroep: ['Doelgroep 1', 'Doelgroep 2'],
+        expertise: ['direteur', 'marketing'],
+        doelgroep: ['Doelgroepje', 'doelgroep'],
         klantresultaten: [
           {
-            naam: 'Klant',
+            naam: 'Klant 7',
             data: {
               ROI: 123, // in percentage
               Opbrengsten: 400, // in euro's
@@ -117,7 +120,7 @@ const store = new Vuex.Store({
               kosten: 419 // in euro's
             }
           }, {
-            naam: 'Klant',
+            naam: 'Klant 8',
             data: {
               ROI: 91, // in percentage
               Opbrengsten: 300, // in euro's
@@ -128,7 +131,7 @@ const store = new Vuex.Store({
               kosten: 387 // in euro's
             }
           }, {
-            naam: 'klant',
+            naam: 'klant 9',
             data: {
               ROI: 200, // in percentage
               Opbrengsten: 200, // in euro's
@@ -156,24 +159,34 @@ const store = new Vuex.Store({
     incrementBy (state, payload) {
       state.count += payload.amount
     },
-    // calculateAverages: function (state) {
+    calculateAverages: function (state) {
       
+      for(const method of state.methods){ // Loop door alle methodes heen
+        var names = ['ROI','Opbrengsten', 'marge', 'conversieRatio','implementatietijd','doorlooptijd','kosten']
+        for(const name of names){ // Doe per methode, ROI en opbrengsten berekenen
+          let divider = method.klantresultaten.length // Vraag aantal op in methode
+          if(name == 'Kosten' || name == 'Opbrengsten') {
+            var decimalPlaces = 2;
+          }else{
+            var decimalPlaces = 0;
+          }
+          var sum = 0
+          for(const result of method.klantresultaten){
+            sum += result.data[name]
+          }
+          if (decimalPlaces > 0) {
+              var value = sum / divider
+              method['gem' + name] = parseFloat(value.toFixed(2))
+              //let avg = '0'.repeat(decimalPlaces) + Math.round(sum / divider * Math.pow(10, decimalPlaces))
+              //method[name] = parseFloat(avg.slice(0, decimalPlaces * -1) + '.' + avg.slice(decimalPlaces * -1))
+          } else {
+              // console.log(sum)
+              method['gem' + name] = Math.round(sum / divider)
+          }
+        }
+      }
 
-    //   let sum = 0
-    //   let results = this.$store.methods.klantresultaten
-    //   console.log(this.$store.methods.klantresultaten)
-    //   let divider = results.length
-    //   for (let i = 0; i < divider; i++) sum += results[i][name]
-
-    //   decimalPlaces = Math.floor(decimalPlaces || 0)
-    //   if (decimalPlaces) {
-    //       let avg = '0'.repeat(decimalPlaces) + Math.round(sum / divider * Math.pow(10, decimalPlaces))
-    //       console.log(avg)
-    //       return parseFloat(avg.slice(0, decimalPlaces * -1) + '.' + avg.slice(decimalPlaces * -1))
-    //   } else {
-    //       return Math.round(sum / divider)
-    //   }
-    // }
+    }
   },
   actions: {
     // Als iemand een 'Nieuwe methode' toevoegt, wordt dat hier afgehandeld

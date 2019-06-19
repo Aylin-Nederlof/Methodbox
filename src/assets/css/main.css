@@ -43,7 +43,6 @@ button{
 
 }
 
-
 .menu .el-col{
     display: flex;
     align-items: center;
@@ -115,6 +114,10 @@ label{
     background-color: #ffffff;
     box-shadow: 0 0 1.5px 0 rgba(31,41,51,0.12), 0 1px 1px 0 rgba(31,41,51,0.12);
   }
+
+input, select, button {
+    outline: none;
+}
 
 .icon{
     line-height: 24;

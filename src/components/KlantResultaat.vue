@@ -13,21 +13,21 @@
         <Result >
             <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/ROI.svg" alt="">
             <div slot="Key" class="subTitle">ROI</div>
-            <div slot="Value" class="subTitle">{{klantResultaatData.ROI}}%</div>
+            <div slot="Value" class="subTitle">{{klantResultaatData.data.ROI}}%</div>
         </Result>
     </el-col>
     <el-col :xs="24" :sm="12" :md="12" :lg="12">
         <Result >
             <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Kosten.svg" alt="">
             <div slot="Key" class="subTitle">Kosten</div>
-            <div slot="Value" class="subTitle">€ {{klantResultaatData.kosten}}</div>
+            <div slot="Value" class="subTitle">€ {{klantResultaatData.data.kosten}}</div>
         </Result>
     </el-col>
     <el-col :xs="24" :sm="12" :md="12" :lg="12">
         <Result class="grey">
             <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Opbrengsten.svg" alt="">
             <div slot="Key" class="subTitle">Opbrengsten</div>
-            <div slot="Value" class="subTitle">€ {{klantResultaatData.Opbrengsten}}</div>
+            <div slot="Value" class="subTitle">€ {{klantResultaatData.data.Opbrengsten}}</div>
         </Result>
     </el-col>
      <el-col :xs="24" :sm="12" :md="12" :lg="12">
@@ -35,7 +35,7 @@
         <Result class="grey">
             <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Doorlooptijd.svg" alt="">
             <div slot="Key" class="subTitle">Doorlooptijd</div>
-            <div slot="Value" class="subTitle">{{klantResultaatData.doorlooptijd}}d</div>
+            <div slot="Value" class="subTitle">{{klantResultaatData.data.doorlooptijd}}d</div>
         </Result>
 
     </el-col>
@@ -43,21 +43,21 @@
         <Result>
             <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Marge.svg" alt="">
             <div slot="Key" class="subTitle">Marge</div>
-            <div slot="Value" class="subTitle">{{klantResultaatData.marge}}%</div>
+            <div slot="Value" class="subTitle">{{klantResultaatData.data.marge}}%</div>
         </Result>
     </el-col>
     <el-col :xs="24" :sm="12" :md="12" :lg="12">
         <Result>
             <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Implementatietijd.svg" alt="">
             <div slot="Key" class="subTitle">Implementatietijd</div>
-            <div slot="Value" class="subTitle">{{klantResultaatData.implementatietijd}}u</div>
+            <div slot="Value" class="subTitle">{{klantResultaatData.data.implementatietijd}}u</div>
         </Result>
     </el-col>
     <el-col :xs="24" :sm="12" :md="12" :lg="12">
         <Result class="grey">
             <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Conversie.svg" alt="">
             <div slot="Key" class="subTitle">Conversie Ratio</div>
-            <div slot="Value" class="subTitle">{{klantResultaatData.conversieRatio}}%</div>
+            <div slot="Value" class="subTitle">{{klantResultaatData.data.conversieRatio}}%</div>
         </Result>
     </el-col>
     </div>

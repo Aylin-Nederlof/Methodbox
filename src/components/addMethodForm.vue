@@ -2,9 +2,10 @@
 <template>
     <div class="wrapper">
         <Menu>
-            <MainCTA to="/Home" slot="MainCTA" class="alignedRight">Opslaan</MainCTA>
+            <MainCTA slot="MainCTA" class="alignedRight" @click="save">Voeg toe</MainCTA>
         </Menu>
-        <div class="form card-bg">
+        <div class="body">
+        <div class="form card-bg" @submit.native.prevent>
            <h2>Methode toevoegen</h2>
            <div class="subTitle">Vul alle gegevens in en druk op "Voeg toe".</div>
            <div class="fields">
@@ -45,15 +46,14 @@
            </div>
 
             <div class="fields">
-           <Label>Sub categorie</Label>
+                <Label>Sub categorie</Label>
                 <el-select
                     v-model="subCategorie"
                     multiple
                     filterable
                     allow-create
                     default-first-option
-                    collapse-tags
-                    placeholder="Choose tags for your article">
+                    placeholder="Bij welke subcategorie hoort het?">
                     <el-option 
                     v-for="subCategory in subCategories"
                     :key="subCategory"
@@ -62,10 +62,63 @@
                     </el-option>
                 </el-select>
            </div>
-        </div>
-
-
+           <div class="fields">
+                <Label>Doelgroepen</Label>
+                <el-select
+                    v-model="doelgroep"
+                    multiple
+                    filterable
+                    allow-create
+                    placeholder="Voor welke doelgroepen is de methode geschikt?">
+                    <el-option 
+                    v-for="doelgroep in doelgroepen"
+                    :key="doelgroep"
+                    :label="doelgroep"
+                    :value="doelgroep">
+                    </el-option>
+                </el-select>
+           </div>
+           <div class="fields">
+                <Label>Benodigde expertises</Label>
+                <el-select
+                    v-model="expertise"
+                    multiple
+                    filterable
+                    allow-create
+                    placeholder="Welke expertises zijn er nodig?">
+                    <el-option 
+                    v-for="expertise in expertises"
+                    :key="expertise"
+                    :label="expertise"
+                    :value="expertise">
+                    </el-option>
+                </el-select>
+           </div>
+            <div class="buttons">
+            <MainCTA slot="MainCTA" v-on:click.native="save" >Voeg toe</MainCTA>
+            <SecondCTA class="alignedRight" @click.native="dialogVisible = true" >Annuleren</SecondCTA>
+            </div>
+            </div>
+       
+        <div class="annuleren alignItemsRight">
+        <thirdCTA @click.native="dialogVisible = true"><img class="iconMarginRight" slot="Icon" src="../assets/Icons/X.svg" alt="">Annuleer</thirdCTA>
+         
         
+        </div> </div>
+        <el-dialog
+            :visible.sync="dialogVisible"
+            width="30%">
+            <span class="dialog-flexer">
+            <img class="iconMarginRight" src="../assets/Icons/warning.svg" alt=""><h2>Waarschuwing</h2>
+             </span>
+            <p>Ingevulde gegevens zullen niet worden opgeslagen.</p>
+            <p>Weet je zeker dat je geen methode wil toevoegen?</p>
+            <span slot="footer" class="dialog-flexer">
+                <MainCTA slot="MainCTA" v-on:click.native="dialogVisible = false" >Verder met toevoegen</MainCTA>
+                <thirdCTA class="alignedRight" @click.native="cancel" >Stoppen</thirdCTA>
+            </span>
+        </el-dialog>
+
     </div>   
 </template>
 <script>
@@ -78,30 +131,81 @@ export default {
     name: 'addMethodForm',
         data () {
         return {
+            dialogVisible: false,
             titel:'',
             intro:'',
             beschrijving:'',
             categorie:'',
             subCategorie:[],
+            doelgroep:[],
+            expertise:[]
 
         }
+    },
+    methods:{
+        save (event) {
+            var data = {
+                'title': this.titel,
+                'intro': this.intro,
+                'discription': this.beschrijving,
+                'category': this.categorie,
+                'subCategory': this.subCategorie,
+                'target_audience': this.doelgroep,
+                'expertise': this.expertise
+            }
+
+            console.log(data)
+            // VueX: It is saved, reload my data.
+        },
+        cancel (event) {
+            this.$router.go(-1)
+        }
+
     },
     computed: {
         methods () {
             return this.$store.state.methods
         },
         subCategories () {
-            
-
-            var i = 0;
-            var len = this.$store.state.methods.length;
-            var arr = []
-            for (; i < len; ) {
-                arr.push(this.$store.state.methods[i].subCategory)
-                console.log(this.$store.state.methods[i].subCategory)
-                i++
+            var o = 0;
+            var length = this.$store.state.methods.length;
+            var array = []
+            var allGroups = []
+            for (; o < length; ) {
+                array = this.$store.state.methods[o].subCategory
+            //    ÷ console.log(this.$store.state.methods[o].subCategory)
+                o++
+                allGroups = allGroups.concat(array);
             }
-            return arr
+            var uniq = [...new Set(allGroups)];
+            return uniq
+        },
+        doelgroepen () {
+            var o = 0;
+            var length = this.$store.state.methods.length;
+            var array = []
+            var allGroups = []
+            for (; o < length; ) {
+                array = this.$store.state.methods[o].doelgroep
+                // console.log(this.$store.state.methods[o].doelgroep)
+                o++
+                allGroups = allGroups.concat(array);
+            }
+            var uniq = [...new Set(allGroups)];
+            return uniq
+        },
+        expertises () {
+            var o = 0;
+            var length = this.$store.state.methods.length;
+            var array = []
+            var allGroups = []
+            for (; o < length; ) {
+                array = this.$store.state.methods[o].expertise
+                o++
+                allGroups = allGroups.concat(array);
+            }
+            var uniq = [...new Set(allGroups)];
+            return uniq
         }
     },
     components: {MainCTA, SecondCTA, thirdCTA, Menu},
@@ -114,15 +218,72 @@ export default {
 <style>
 .form{
     width: 35%;
-    margin: 0 auto;
+    /* margin: 0 auto 40px; */
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 32.5%;
+}
+form{
+    margin: 0;
+    padding: 0;
+}
+.body{
+    display: flex;
+    /* flex-wrap: nowrap; */
+    /* justify-content: center; */
+    margin: 24px;
+    /* width: 96%; */
+}
+.annuleren{
+    display: flex;
+    width:32.2%;
+     /* margin-left: auto; */
+     z-index: 22000;
+}
+.annuleren button.thirdCTA{
+    height: 24px;
 }
 
 .fields{
     width: 100%;
     margin: 24px 0 0;
 }
-.el-radio{
+label.el-radio{
     display: block;
     margin:8px 0;
+}
+
+.el-radio__input.is-checked+.el-radio__label, .el-radio__input.is-checked .el-radio__inner {
+    color: #00B0FF !important;
+}
+.el-select .el-input.is-focus .el-input__inner {
+    border-color: #00B0FF !important;
+}
+.el-select-dropdown__item.selected {
+    color: #00B0FF !important;
+}
+
+.el-select{
+    width: 100%;
+}
+.buttons{
+    margin-top: 24px;
+    display: flex;
+}
+.el-dialog__header {
+    display: none;
+}
+
+.el-dialog__body {
+    padding: 24px;
+    color: black;
+}
+.el-dialog__footer {
+    padding: 0 24px 24px;
+}
+
+.dialog-flexer{
+    padding: 0;
+    display: flex;
 }
 </style>

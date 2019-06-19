@@ -24,9 +24,6 @@
           <input hidden type="checkbox" id="fullfil" value="Fullfil" v-model="checkedCategorie" @click="fullfilToggle()">
           Fullfil
           </label>
-
-          
-          <span>Checked categorie: {{ checkedCategorie }}</span>
         </div>
       </div>
       <div class="filter">
@@ -76,7 +73,6 @@
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
          </div>
-         {{doelgroep}}
         </div>
       </div>
     </el-row>
@@ -113,9 +109,9 @@ export default {
       visibilityActive: false,
       transferActive: false,
       fullfilActive: false,
-      Doorlooptijd: [5, 8],
-      implementatietijd: [5, 8],
-      kosten: [5, 8]
+      Doorlooptijd: [5, 40],
+      implementatietijd: [5, 79],
+      kosten: [5, 25]
     }
   },
   methods: {
@@ -218,5 +214,29 @@ li.el-select-dropdown__item{
     border-color: #e9e9eb;
     color: #1F2933;
 }
+
+.el-slider__button{
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-color: #3E4B59;
+}
+.el-slider__button-wrapper {
+    height: 16px;
+    width: 16px;
+    top:-11px
+}
+
+.el-slider__bar {
+    height: 2px;
+    background-color: #3E4B59;
+}
+.el-slider__runway {
+    background-color: #CBD2D9;
+    height: 2px;
+    margin: 16px 0 8px
+}
+
+
 
 </style>
