@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import ElementUI from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/nl'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/main.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -17,7 +18,9 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
 Vue.config.productionTip = false
-Vue.use(ElementUI)
+
+Vue.use(ElementUI, { locale })
+
 
 /* eslint-disable no-new */
 new Vue({
@@ -26,5 +29,5 @@ new Vue({
   router,
   components: { App },
   template: '<App/>'
-  
+
 })

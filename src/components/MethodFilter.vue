@@ -33,7 +33,7 @@
         SUPER SLIDER 1
         <div class="block">
           <el-slider
-            v-model="Doorlooptijd"
+            v-model="totalTime"
             range>
           </el-slider>
         </div>
@@ -46,7 +46,7 @@
         SUPER SLIDER 2
         <div class="block">
           <el-slider
-            v-model="implementatietijd"
+            v-model="implementationTime"
             range>
           </el-slider>
         </div>
@@ -58,7 +58,7 @@
         SUPER SLIDER 3
         <div class="block">
           <el-slider
-            v-model="kosten"
+            v-model="costs"
             range>
           </el-slider>
         </div>
@@ -69,7 +69,7 @@
         <div class="info">
         Doelgroep dingen
          <div class="block">
-           <el-select v-model="doelgroep" multiple collapse-tags placeholder="Doelgroep">
+           <el-select v-model="targetAudience" multiple collapse-tags placeholder="Doelgroep">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
          </div>
@@ -100,7 +100,7 @@ export default {
           value: 'Option5',
           label: 'Option5'
         }],
-      doelgroep: [],
+      targetAudience: [],
 
       optimalisatie: [],
       tijd: [],
@@ -109,9 +109,9 @@ export default {
       visibilityActive: false,
       transferActive: false,
       fullfilActive: false,
-      Doorlooptijd: [5, 40],
-      implementatietijd: [5, 79],
-      kosten: [5, 25]
+      totalTime: [5, 40],
+      implementationTime: [5, 79],
+      costs: [5, 25]
     }
   },
   methods: {

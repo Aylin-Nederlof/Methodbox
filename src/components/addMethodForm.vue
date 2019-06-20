@@ -32,7 +32,7 @@
                 <el-input
                     type="textarea"
                     placeholder="Please input"
-                    v-model="beschrijving"
+                    v-model="discription"
                     show-word-limit
                     >
                     </el-input>
@@ -65,7 +65,7 @@
            <div class="fields">
                 <Label>Doelgroepen</Label>
                 <el-select
-                    v-model="doelgroep"
+                    v-model="targetAudience"
                     multiple
                     filterable
                     allow-create
@@ -134,10 +134,10 @@ export default {
             dialogVisible: false,
             titel:'',
             intro:'',
-            beschrijving:'',
+            discription:'',
             categorie:'',
             subCategorie:[],
-            doelgroep:[],
+            targetAudience:[],
             expertise:[]
 
         }
@@ -147,10 +147,10 @@ export default {
             var data = {
                 'title': this.titel,
                 'intro': this.intro,
-                'discription': this.beschrijving,
+                'discription': this.discription,
                 'category': this.categorie,
                 'subCategory': this.subCategorie,
-                'target_audience': this.doelgroep,
+                'target_audience': this.targetAudience,
                 'expertise': this.expertise
             }
 
@@ -186,7 +186,7 @@ export default {
             var array = []
             var allGroups = []
             for (; o < length; ) {
-                array = this.$store.state.methods[o].doelgroep
+                array = this.$store.state.methods[o].targetAudience
                 // console.log(this.$store.state.methods[o].doelgroep)
                 o++
                 allGroups = allGroups.concat(array);

@@ -10,44 +10,43 @@ const store = new Vuex.Store({
         title: 'test methode',
         category: 'Transfer',
         subCategory: ['Email'],
-        beschrijving: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
+        discription: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
         intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, non commodo luctus.',
-        timesUsed: 6,
         expertise: ['lolbroek', 'tester'],
-        doelgroep: ['Doelgroeep 1', 'Doelgrooep 2'],
-        klantresultaten: [
+        targetAudience: ['Doelgroeep 1', 'Doelgrooep 2'],
+        clientResults: [
           {
-            naam: 'Klant 1',
+            name: 'Klant 1',
             data: {
               ROI: 123, // in percentage
-              Opbrengsten: 400, // in euro's
-              marge: 34, // in percentage
-              conversieRatio: 23, // in percentage
-              implementatietijd: 24, // in work hours
-              doorlooptijd: 20, // in work days
-              kosten: 419 // in euro's
+              proceeds: 400, // in euro's
+              margin: 34, // in percentage
+              conversionRate: 23, // in percentage
+              implementationTime: 24, // in work hours
+              totalTime: 20, // in work days
+              costs: 419 // in euro's
             }
           }, {
-            naam: 'Klant 2',
+            name: 'Klant 2',
             data: {
               ROI: 91, // in percentage
-              Opbrengsten: 300, // in euro's
-              marge: 5, // in percentage
-              conversieRatio: 42, // in percentage
-              implementatietijd: 32, // in work hours
-              doorlooptijd: 25, // in work days
-              kosten: 387 // in euro's
+              proceeds: 300, // in euro's
+              margin: 5, // in percentage
+              conversionRate: 42, // in percentage
+              implementationTime: 32, // in work hours
+              totalTime: 25, // in work days
+              costs: 387 // in euro's
             }
           }, {
-            naam: 'klant 3',
+            name: 'klant 3',
             data: {
               ROI: 200, // in percentage
-              Opbrengsten: 200, // in euro's
-              marge: 21, // in percentage
-              conversieRatio: 21, // in percentage
-              implementatietijd: 20, // in work hours
-              doorlooptijd: 30, // in work days
-              kosten: 374 // in euro's
+              proceeds: 200, // in euro's
+              margin: 21, // in percentage
+              conversionRate: 21, // in percentage
+              implementationTime: 20, // in work hours
+              totalTime: 30, // in work days
+              costs: 374 // in euro's
             }
           }
         ]
@@ -56,44 +55,43 @@ const store = new Vuex.Store({
         title: 'Methodetje',
         category: 'Visibility',
         subCategory: ['Instagram'],
-        beschrijving: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
+        discription: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
         intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, non commodo luctus.',
-        timesUsed: 6,
         expertise: ['Designerjes', 'programmeur'],
-        doelgroep: ['doelgroep', 'Doelgroepert 2'],
-        klantresultaten: [
+        targetAudience: ['doelgroep', 'Doelgroepert 2'],
+        clientResults: [
           {
-            naam: 'Klant 4',
+            name: 'Klant 4',
             data: {
               ROI: 123, // in percentage
-              Opbrengsten: 400, // in euro's
-              marge: 34, // in percentage
-              conversieRatio: 23, // in percentage
-              implementatietijd: 24, // in work hours
-              doorlooptijd: 20, // in work days
-              kosten: 419 // in euro's
+              proceeds: 400, // in euro's
+              margin: 34, // in percentage
+              conversionRate: 23, // in percentage
+              implementationTime: 24, // in work hours
+              totalTime: 20, // in work days
+              costs: 419 // in euro's
             }
           }, {
-            naam: 'Klant 5',
+            name: 'Klant 5',
             data: {
               ROI: 91, // in percentage
-              Opbrengsten: 300, // in euro's
-              marge: 5, // in percentage
-              conversieRatio: 42, // in percentage
-              implementatietijd: 32, // in work hours
-              doorlooptijd: 25, // in work days
-              kosten: 387 // in euro's
+              proceeds: 300, // in euro's
+              margin: 5, // in percentage
+              conversionRate: 42, // in percentage
+              implementationTime: 32, // in work hours
+              totalTime: 25, // in work days
+              costs: 387 // in euro's
             }
           }, {
-            naam: 'klant 6',
+            name: 'klant 6',
             data: {
               ROI: 200, // in percentage
-              Opbrengsten: 200, // in euro's
-              marge: 21, // in percentage
-              conversieRatio: 21, // in percentage
-              implementatietijd: 20, // in work hours
-              doorlooptijd: 30, // in work days
-              kosten: 374 // in euro's
+              proceeds: 200, // in euro's
+              margin: 21, // in percentage
+              conversionRate: 21, // in percentage
+              implementationTime: 20, // in work hours
+              totalTime: 30, // in work days
+              costs: 374 // in euro's
             }
           }
         ]
@@ -102,44 +100,55 @@ const store = new Vuex.Store({
         title: 'Nummertje 3',
         category: 'Focus',
         subCategory: ['Persona\'s'],
-        beschrijving: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
+        discription: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
         intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, non commodo luctus.',
-        timesUsed: 6,
         expertise: ['direteur', 'marketing'],
-        doelgroep: ['Doelgroepje', 'doelgroep'],
-        klantresultaten: [
+        targetAudience: ['Doelgroepje', 'doelgroep'],
+        clientResults: [
           {
-            naam: 'Klant 7',
+            name: 'Klant 7',
             data: {
               ROI: 123, // in percentage
-              Opbrengsten: 400, // in euro's
-              marge: 34, // in percentage
-              conversieRatio: 23, // in percentage
-              implementatietijd: 24, // in work hours
-              doorlooptijd: 20, // in work days
-              kosten: 419 // in euro's
+              proceeds: 400, // in euro's
+              margin: 34, // in percentage
+              conversionRate: 23, // in percentage
+              implementationTime: 24, // in work hours
+              totalTime: 20, // in work days
+              costs: 419 // in euro's
+            }
+          },
+          {
+            name: 'Klant 7',
+            data: {
+              ROI: 123, // in percentage
+              proceeds: 400, // in euro's
+              margin: 34, // in percentage
+              conversionRate: 23, // in percentage
+              implementationTime: 24, // in work hours
+              totalTime: 20, // in work days
+              costs: 419 // in euro's
             }
           }, {
-            naam: 'Klant 8',
+            name: 'Klant 8',
             data: {
               ROI: 91, // in percentage
-              Opbrengsten: 300, // in euro's
-              marge: 5, // in percentage
-              conversieRatio: 42, // in percentage
-              implementatietijd: 32, // in work hours
-              doorlooptijd: 25, // in work days
-              kosten: 387 // in euro's
+              proceeds: 300, // in euro's
+              margin: 5, // in percentage
+              conversionRate: 42, // in percentage
+              implementationTime: 32, // in work hours
+              totalTime: 25, // in work days
+              costs: 387 // in euro's
             }
           }, {
-            naam: 'klant 9',
+            name: 'klant 9',
             data: {
               ROI: 200, // in percentage
-              Opbrengsten: 200, // in euro's
-              marge: 21, // in percentage
-              conversieRatio: 21, // in percentage
-              implementatietijd: 20, // in work hours
-              doorlooptijd: 30, // in work days
-              kosten: 374 // in euro's
+              proceeds: 200, // in euro's
+              margin: 21, // in percentage
+              conversionRate: 21, // in percentage
+              implementationTime: 20, // in work hours
+              totalTime: 30, // in work days
+              costs: 374 // in euro's
             }
           }
         ]
@@ -156,16 +165,16 @@ const store = new Vuex.Store({
     calculateAverages: function (state) {
       
       for(const method of state.methods){ // Loop door alle methodes heen
-        var names = ['ROI','Opbrengsten', 'marge', 'conversieRatio','implementatietijd','doorlooptijd','kosten']
-        for(const name of names){ // Doe per methode, ROI en opbrengsten berekenen
-          let divider = method.klantresultaten.length // Vraag aantal op in methode
-          if(name == 'Kosten' || name == 'Opbrengsten') {
+        var names = ['ROI','proceeds', 'margin', 'conversionRate','implementationTime','totalTime','costs']
+        for(const name of names){ // Doe per methode, ROI en proceeds berekenen
+          let divider = method.clientResults.length // Vraag aantal op in methode
+          if(name == 'costs' || name == 'proceeds') {
             var decimalPlaces = 2;
           }else{
             var decimalPlaces = 0;
           }
           var sum = 0
-          for(const result of method.klantresultaten){
+          for(const result of method.clientResults){
             sum += result.data[name]
           }
           if (decimalPlaces > 0) {
@@ -180,6 +189,11 @@ const store = new Vuex.Store({
         }
       }
 
+    },
+    timesUsed (state){
+      for(const method of state.methods){
+        method['timesUsed'] =  method.clientResults.length
+      }
     }
   },
   actions: {
@@ -187,6 +201,8 @@ const store = new Vuex.Store({
   }
 });
 
+
 store.commit('calculateAverages')
+store.commit('timesUsed')
 
 export default store

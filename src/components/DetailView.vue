@@ -13,7 +13,7 @@
 
             <router-link :to="{ name: 'editMethodForm', params: {methodeID: methode.id, methodeNaam: methode.title }}"><thirdCTA class="alignedRight"><img class="iconMarginRight" slot="Icon" src="../assets/Icons/edit.svg" alt="">Bewerk</thirdCTA></router-link>
             <router-link to="#"><thirdCTA class="alignedRight"><img class="iconMarginRight" src="../assets/Icons/archive.svg" alt="">Archiveer</thirdCTA></router-link>
-            <router-link to="#"><MainCTA class="alignedRight"><img class="iconMarginRight" src="../assets/Icons/plusWhite.svg" alt="">Voeg resultaat toe</MainCTA></router-link>
+            <router-link :to="{ name: 'AddResult', params: {methodeID: methode.id, methodeNaam: methode.title }}"><MainCTA class="alignedRight"><img class="iconMarginRight" src="../assets/Icons/plusWhite.svg" alt="">Voeg resultaat toe</MainCTA></router-link>
             <router-link to="#"><SecondCTA class="alignedRight"><img class="iconMarginRight" src="../assets/Icons/present.svg" alt="">Presentatie modus</SecondCTA></router-link>
             </el-col>
            
@@ -38,7 +38,7 @@
                     </el-row>
                     <el-row>
                     <div class="section">
-                        <p>{{methode.beschrijving}}</p>
+                        <p>{{methode.discription}}</p>
                     </div>
                     </el-row>
                     </div>
@@ -55,7 +55,7 @@
                         </div>
                      </el-row>         
 
-                    <el-row v-for="klantResultaat in OrderedResults" :key="klantResultaat.naam">
+                    <el-row v-for="klantResultaat in OrderedResults" :key="klantResultaat.name">
                         <klantResultaat :klantResultaatData="klantResultaat"></klantResultaat>
                     </el-row>
 
@@ -77,42 +77,42 @@
                             <Result>
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Opbrengsten.svg" alt="">
                                 <div slot="Key" class="subTitle">Opbrengsten</div>
-                                <div slot="Value" class="subTitle">€ {{getAverage('Opbrengsten')}}</div>
+                                <div slot="Value" class="subTitle">€ {{getAverage('proceeds')}}</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result class="grey">
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Doorlooptijd.svg" alt="">
                                 <div slot="Key" class="subTitle">Doorloop tijd</div>
-                                <div slot="Value" class="subTitle">{{getAverage('doorlooptijd')}}d</div>
+                                <div slot="Value" class="subTitle">{{getAverage('totalTime')}}d</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result>
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/implementatietijd.svg" alt="">
                                 <div slot="Key" class="subTitle">Impl. tijd</div>
-                                <div slot="Value" class="subTitle">{{getAverage('implementatietijd')}}u</div>
+                                <div slot="Value" class="subTitle">{{getAverage('implementationTime')}}u</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result class="grey">
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Kosten.svg" alt="">
                                 <div slot="Key" class="subTitle">Kosten</div>
-                                <div slot="Value" class="subTitle">€ {{getAverage('kosten')}}</div>
+                                <div slot="Value" class="subTitle">€ {{getAverage('costs')}}</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result>
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Marge.svg" alt="">
                                 <div slot="Key" class="subTitle">Marge</div>
-                                <div slot="Value" class="subTitle">{{getAverage('marge')}}%</div>
+                                <div slot="Value" class="subTitle">{{getAverage('margin')}}%</div>
                             </Result>
                         </el-col>
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result class="grey">
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Conversie.svg" alt="">
                                 <div slot="Key" class="subTitle">Conversie ratio</div>
-                                <div slot="Value" class="subTitle">{{getAverage('conversieRatio')}}%</div>
+                                <div slot="Value" class="subTitle">{{getAverage('conversionRate')}}%</div>
                             </Result>
                         </el-col>
                         </el-row>
@@ -138,12 +138,12 @@ import _ from 'lodash'
         data () {
             return {
                 msg: 'bla',
-                selected: 'naam_asc',
+                selected: 'name_asc',
 
                 sortingOptions: {
-                    naam_asc:    { order: { name: 'naam',   object: 'naam', direction: 'asc'  }, text: 'Sorteer op naam'},
-                    kosten_asc:  { order: { name: 'kosten', object: 'data.kosten', direction: 'asc'  }, text: 'kosten - laag naar hoog'},
-                    kosten_desc: { order: { name: 'kosten', direction: 'desc' }, text: 'kosten - hoog naar laag'},
+                    name_asc:    { order: { name: 'name',   object: 'name', direction: 'asc'  }, text: 'Sorteer op naam'},
+                    costs_asc:  { order: { name: 'costs', object: 'data.costs', direction: 'asc'  }, text: 'kosten - laag naar hoog'},
+                    costs_desc: { order: { name: 'costs', direction: 'desc' }, text: 'kosten - hoog naar laag'},
                     ROI_asc:     { order: { name: 'ROI',    direction: 'asc'  }, text: 'ROI - laag naar hoog'},
                     ROI_desc:    { order: { name: 'ROI',    direction: 'desc' }, text: 'ROI - hoog naar laag'}
                 }
@@ -184,7 +184,7 @@ import _ from 'lodash'
             },
             OrderedResults () {
                 var selected = this.sortingOptions[this.selected]
-                return _.orderBy(this.methode.klantresultaten, selected.order.object, selected.order.direction)
+                return _.orderBy(this.methode.clientResults, selected.order.object, selected.order.direction)
             },
             methodID () {
                 return this.$route.params.methodeID;
@@ -207,6 +207,9 @@ import _ from 'lodash'
    }
    .padding{
        padding: 0 24px 16px;
+   }
+   .method{
+       margin-bottom: 24px; 
    }
 
    .Result{

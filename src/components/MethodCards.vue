@@ -24,7 +24,7 @@
         <el-row class="section">
           <label>Doelgroep:</label>
           <div class="tags">
-              <doelgroepTag v-for="(doelgroeptag, index) in methodData.doelgroep" :key="index">{{doelgroeptag}}</doelgroepTag>
+              <doelgroepTag v-for="(doelgroeptag, index) in methodData.targetAudience" :key="index">{{doelgroeptag}}</doelgroepTag>
           </div>
         </el-row>
         <el-row  class="section">
@@ -41,21 +41,21 @@
               <Result>
                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Doorlooptijd.svg" alt="">
                 <div slot="Key" class="subTitle">Doorloop tijd</div>
-                <div slot="Value" class="subTitle">{{getAverage('doorlooptijd')}}d</div>
+                <div slot="Value" class="subTitle">{{getAverage('totalTime')}}d</div>
               </Result>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="12">
               <Result >
                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Implementatietijd.svg" alt="">
                 <div slot="Key" class="subTitle">Impl. tijd</div>
-                <div slot="Value" class="subTitle">{{getAverage('implementatietijd')}}u</div>
+                <div slot="Value" class="subTitle">{{getAverage('implementationTime')}}u</div>
               </Result>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="12">
               <Result>
                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Kosten.svg" alt="">
                 <div slot="Key" class="subTitle">Kosten</div>
-                <div slot="Value" class="subTitle">€ {{getAverage('kosten')}}</div>
+                <div slot="Value" class="subTitle">€ {{getAverage('costs')}}</div>
               </Result>
           </el-col>
           </el-row>
@@ -88,7 +88,6 @@ export default {
       getAverage (name) {
         return this.methodData["gem" + name]
       }
-
   },
   computed: {
     categorieKleur: function () {

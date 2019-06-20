@@ -33,7 +33,7 @@
                     <el-input
                         type="textarea"
                         placeholder="Please input"
-                        v-model="methode.beschrijving"
+                        v-model="methode.discription"
                         show-word-limit
                         :rows="4"
                         >
@@ -67,7 +67,7 @@
             <div class="fields">
                     <Label>Doelgroepen</Label>
                     <el-select
-                        v-model="methode.doelgroep"
+                        v-model="methode.targetAudience"
                         multiple
                         filterable
                         allow-create
@@ -146,10 +146,10 @@ export default {
                  
                 'title': this.methode.title,
                 'intro': this.methode.intro,
-                'discription': this.methode.beschrijving,
+                'discription': this.methode.discription,
                 'category': this.methode.category,
                 'subCategory': this.methode.subCategory,
-                'target_audience': this.methode.doelgroep,
+                'target_audience': this.methode.targetAudience,
                 'expertise': this.methode.expertise
             }
             
@@ -187,7 +187,6 @@ export default {
             var allGroups = []
             for (; o < length; ) {
                 array = this.$store.state.methods[o].subCategory
-            //    ÷ console.log(this.$store.state.methods[o].subCategory)
                 o++
                 allGroups = allGroups.concat(array);
             }
@@ -200,8 +199,7 @@ export default {
             var array = []
             var allGroups = []
             for (; o < length; ) {
-                array = this.$store.state.methods[o].doelgroep
-                // console.log(this.$store.state.methods[o].doelgroep)
+                array = this.$store.state.methods[o].targetAudience
                 o++
                 allGroups = allGroups.concat(array);
             }

@@ -24,7 +24,7 @@
             <el-col :span="12" class="alignItemsRight section">
               <div class="subTitle"> <b>....</b> passende methoden gevonden</div>
                 <select v-model="currentOrder" class="alignedRight sorteer">
-                    <option value="gemKosten">Sorteer op kosten</option>
+                    <option value="gemcosts">Sorteer op kosten</option>
                     <option value="gemROI">Sorteer op ROI</option>
                 </select>
             </el-col>
@@ -69,7 +69,7 @@ export default {
     },
     getAverage: function (name, decimalPlaces) {
       let sum = 0
-      let results = this.methods.klantresultaten
+      let results = this.methods.clientResults
       let divider = results.length
       for (let i = 0; i < divider; i++) sum += results[i][name]
 

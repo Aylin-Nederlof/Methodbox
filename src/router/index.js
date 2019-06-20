@@ -6,6 +6,7 @@ import Home from '@/components/Home'
 import DetailView from '@/components/DetailView'
 import addMethodForm from '@/components/addMethodForm'
 import editMethodForm from '@/components/editMethodForm'
+import AddResult from '@/components/AddResult'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
     path: '/editMethodForm/:methodeID/:methodeNaam',
     name: 'editMethodForm',
     component: editMethodForm,
+    },
+    {
+    path: '/AddResult/:methodeID/:methodeNaam',
+    name: 'AddResult',
+    component: AddResult,
     },
   ]
 })
