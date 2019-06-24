@@ -3,7 +3,7 @@
       <el-row class="padding">
         <el-col :span="20"><label>{{klantResultaatData.name}}</label></el-col>
         <el-col :span="4" class="alignItemsRight">
-            <img src="../assets/Icons/edit.svg" alt="">
+        <router-link :to="{ name: 'editResult', params: {methodeID: methode.id, resultID: klantResultaatData.id, klantResultaatData: klantResultaatData }}"><img src="../assets/Icons/edit.svg" alt=""></router-link>
             <img class="iconMarginLeft" src="../assets/Icons/delete.svg" alt="">
 
         </el-col>
@@ -73,6 +73,23 @@ export default {
   data () {
     return {
 
+    }
+
+  },
+  computed:{
+    methode () {
+            let methods = this.$store.state.methods
+
+            for (var no in methods){
+                if(methods[no].id == this.methodID){
+                    return methods[no]
+                }
+            }
+
+            return 'none'
+    },
+    methodID () {
+            return this.$route.params.methodeID;
     }
   },
   components: {Result}

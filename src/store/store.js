@@ -15,7 +15,8 @@ const store = new Vuex.Store({
         expertise: ['lolbroek', 'tester'],
         targetAudience: ['Doelgroeep 1', 'Doelgrooep 2'],
         clientResults: [
-          {
+          { 
+            id: 1,
             name: 'Klant 1',
             data: {
               ROI: 123, // in percentage
@@ -27,6 +28,7 @@ const store = new Vuex.Store({
               costs: 419 // in euro's
             }
           }, {
+            id: 2,
             name: 'Klant 2',
             data: {
               ROI: 91, // in percentage
@@ -38,6 +40,7 @@ const store = new Vuex.Store({
               costs: 387 // in euro's
             }
           }, {
+            id: 3,
             name: 'klant 3',
             data: {
               ROI: 200, // in percentage
@@ -60,7 +63,8 @@ const store = new Vuex.Store({
         expertise: ['Designerjes', 'programmeur'],
         targetAudience: ['doelgroep', 'Doelgroepert 2'],
         clientResults: [
-          {
+          { 
+            id: 4,
             name: 'Klant 4',
             data: {
               ROI: 123, // in percentage
@@ -72,6 +76,7 @@ const store = new Vuex.Store({
               costs: 419 // in euro's
             }
           }, {
+            id: 5,
             name: 'Klant 5',
             data: {
               ROI: 91, // in percentage
@@ -83,6 +88,7 @@ const store = new Vuex.Store({
               costs: 387 // in euro's
             }
           }, {
+            id: 6,
             name: 'klant 6',
             data: {
               ROI: 200, // in percentage
@@ -106,6 +112,7 @@ const store = new Vuex.Store({
         targetAudience: ['Doelgroepje', 'doelgroep'],
         clientResults: [
           {
+            id: 7,
             name: 'Klant 7',
             data: {
               ROI: 123, // in percentage
@@ -118,6 +125,7 @@ const store = new Vuex.Store({
             }
           },
           {
+            id: 8,
             name: 'Klant 7',
             data: {
               ROI: 123, // in percentage
@@ -140,6 +148,7 @@ const store = new Vuex.Store({
               costs: 387 // in euro's
             }
           }, {
+            id: 9,
             name: 'klant 9',
             data: {
               ROI: 200, // in percentage
@@ -201,6 +210,9 @@ const store = new Vuex.Store({
   }
 });
 
+// axios
+//   .get('http://methodbox.nl/api/methods')
+//   .then(response => (store.state.methods = response.data))
 
 store.commit('calculateAverages')
 store.commit('timesUsed')
