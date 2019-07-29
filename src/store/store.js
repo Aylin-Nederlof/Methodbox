@@ -1,168 +1,39 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import _ from 'lodash'
+import Axios from 'axios';
 
 Vue.use(Vuex)
 
+const URL = 'https://cors-anywhere.herokuapp.com/http://methodbox.nl/api/methods';
+
 const store = new Vuex.Store({
   state: {
-    methods: [
-      { id: 1,
-        title: 'test methode',
-        category: 'Transfer',
-        subCategory: ['Email'],
-        discription: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
-        intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, non commodo luctus.',
-        expertise: ['lolbroek', 'tester'],
-        targetAudience: ['Doelgroeep 1', 'Doelgrooep 2'],
-        clientResults: [
-          { 
-            id: 1,
-            name: 'Klant 1',
-            data: {
-              ROI: 123, // in percentage
-              proceeds: 400, // in euro's
-              margin: 34, // in percentage
-              conversionRate: 23, // in percentage
-              implementationTime: 24, // in work hours
-              totalTime: 20, // in work days
-              costs: 419 // in euro's
-            }
-          }, {
-            id: 2,
-            name: 'Klant 2',
-            data: {
-              ROI: 91, // in percentage
-              proceeds: 300, // in euro's
-              margin: 5, // in percentage
-              conversionRate: 42, // in percentage
-              implementationTime: 32, // in work hours
-              totalTime: 25, // in work days
-              costs: 387 // in euro's
-            }
-          }, {
-            id: 3,
-            name: 'klant 3',
-            data: {
-              ROI: 200, // in percentage
-              proceeds: 200, // in euro's
-              margin: 21, // in percentage
-              conversionRate: 21, // in percentage
-              implementationTime: 20, // in work hours
-              totalTime: 30, // in work days
-              costs: 374 // in euro's
-            }
-          }
-        ]
-      },
-      { id: 2,
-        title: 'Methodetje',
-        category: 'Visibility',
-        subCategory: ['Instagram'],
-        discription: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
-        intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, non commodo luctus.',
-        expertise: ['Designerjes', 'programmeur'],
-        targetAudience: ['doelgroep', 'Doelgroepert 2'],
-        clientResults: [
-          { 
-            id: 4,
-            name: 'Klant 4',
-            data: {
-              ROI: 123, // in percentage
-              proceeds: 400, // in euro's
-              margin: 34, // in percentage
-              conversionRate: 23, // in percentage
-              implementationTime: 24, // in work hours
-              totalTime: 20, // in work days
-              costs: 419 // in euro's
-            }
-          }, {
-            id: 5,
-            name: 'Klant 5',
-            data: {
-              ROI: 91, // in percentage
-              proceeds: 300, // in euro's
-              margin: 5, // in percentage
-              conversionRate: 42, // in percentage
-              implementationTime: 32, // in work hours
-              totalTime: 25, // in work days
-              costs: 387 // in euro's
-            }
-          }, {
-            id: 6,
-            name: 'klant 6',
-            data: {
-              ROI: 200, // in percentage
-              proceeds: 200, // in euro's
-              margin: 21, // in percentage
-              conversionRate: 21, // in percentage
-              implementationTime: 20, // in work hours
-              totalTime: 30, // in work days
-              costs: 374 // in euro's
-            }
-          }
-        ]
-      },
-      { id: 3,
-        title: 'Nummertje 3',
-        category: 'Focus',
-        subCategory: ['Persona\'s'],
-        discription: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
-        intro: 'Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, non commodo luctus.',
-        expertise: ['direteur', 'marketing'],
-        targetAudience: ['Doelgroepje', 'doelgroep'],
-        clientResults: [
-          {
-            id: 7,
-            name: 'Klant 7',
-            data: {
-              ROI: 123, // in percentage
-              proceeds: 400, // in euro's
-              margin: 34, // in percentage
-              conversionRate: 23, // in percentage
-              implementationTime: 24, // in work hours
-              totalTime: 20, // in work days
-              costs: 419 // in euro's
-            }
-          },
-          {
-            id: 8,
-            name: 'Klant 7',
-            data: {
-              ROI: 123, // in percentage
-              proceeds: 400, // in euro's
-              margin: 34, // in percentage
-              conversionRate: 23, // in percentage
-              implementationTime: 24, // in work hours
-              totalTime: 20, // in work days
-              costs: 419 // in euro's
-            }
-          }, {
-            name: 'Klant 8',
-            data: {
-              ROI: 91, // in percentage
-              proceeds: 300, // in euro's
-              margin: 5, // in percentage
-              conversionRate: 42, // in percentage
-              implementationTime: 32, // in work hours
-              totalTime: 25, // in work days
-              costs: 387 // in euro's
-            }
-          }, {
-            id: 9,
-            name: 'klant 9',
-            data: {
-              ROI: 200, // in percentage
-              proceeds: 200, // in euro's
-              margin: 21, // in percentage
-              conversionRate: 21, // in percentage
-              implementationTime: 20, // in work hours
-              totalTime: 30, // in work days
-              costs: 374 // in euro's
-            }
-          }
-        ]
-      }
-    ]  
+    methods: [],
+    allMethods:[],
+    availableMethods:     null,
+    loading: true,
+    minMax: {
+      totalTime:          null,
+      implementationTime: null,
+      costs:              null
+    },
+    selected: {
+      category:           [],
+      totalTime:          null,
+      implementationTime: null,
+      costs:              null,
+      targetAudience:     [],
+      activeOrNoneActive: 'Actieve methoden',
+      sortingOption:      'ROI_desc'
+    },
+    filterResults: {
+      category:           null,
+      totalTime:          null,
+      implementationTime: null,
+      costs:              null,
+      targetAudience:     null
+    }
   },
   getters: {
     // getAverage (state) {
@@ -171,50 +42,165 @@ const store = new Vuex.Store({
     // }
   },
   mutations: {
-    calculateAverages: function (state) {
-      
-      for(const method of state.methods){ // Loop door alle methodes heen
-        var names = ['ROI','proceeds', 'margin', 'conversionRate','implementationTime','totalTime','costs']
-        for(const name of names){ // Doe per methode, ROI en proceeds berekenen
-          let divider = method.clientResults.length // Vraag aantal op in methode
-          if(name == 'costs' || name == 'proceeds') {
-            var decimalPlaces = 2;
-          }else{
-            var decimalPlaces = 0;
-          }
-          var sum = 0
-          for(const result of method.clientResults){
-            sum += result.data[name]
-          }
-          if (decimalPlaces > 0) {
-              var value = sum / divider
-              method['gem' + name] = parseFloat(value.toFixed(2))
-              //let avg = '0'.repeat(decimalPlaces) + Math.round(sum / divider * Math.pow(10, decimalPlaces))
-              //method[name] = parseFloat(avg.slice(0, decimalPlaces * -1) + '.' + avg.slice(decimalPlaces * -1))
+    
+    storeMethods (state, methods) {
+      state.methods = methods
+    },
+    storeAllMethods (state, methods) {
+      state.allMethods = methods
+    },
+    changeLoadingState (state, loading) {
+    	state.loading = loading
+    },
+    changeActiveState (state, status) {
+    	state.selected.activeOrNoneActive = status
+    },
+    changeMethodSortingState (state, option) {
+    	state.selected.sortingOption = option
+    },
+    filterArrayWithString (state, data) {
+      state.selected[data.name] = data.value
+      if (data.value && data.value.length) {
+        state.filterResults[data.name] = state.allMethods.reduce(function(result, o) {
+        
+          if (data.value.indexOf(o[data.name]) === -1) result.push(o.id)
+          return result
+          
+        }, [])
+      } else {
+       state.filterResults[data.name] = null
+      }
+      this.commit('filterMethods')
+    },
+    filterArrayWithArray (state, data) {
+      state.selected[data.name] = data.value
+      if (data.value && data.value.length) {
+        state.filterResults[data.name] = state.allMethods.reduce(function(result, o) {
+          if (!o[data.name] || !o[data.name].length || !o[data.name].some(v => data.value.indexOf(v) !== -1)) result.push(o.id)
+          
+          return result
+        }, [])
+      } else {
+        state.filterResults[data.name] = null
+      }
+      this.commit('filterMethods')
+    },
+    filterMinMax (state, data) {
+      state.selected[data.name] = data.value
+      if (data.value) {
+
+        state.filterResults[data.name] = state.allMethods.reduce(function(result, o) {
+          if (o.clientResults && o.clientResults.length) {
+            let avg = o.average[data.name]
+            if (avg < data.value[0] || avg > data.value[1]) result.push(o.id)
           } else {
-              // console.log(sum)
-              method['gem' + name] = Math.round(sum / divider)
+            // Laat resultaat onderaan resultatenlijst staan met een opacity van .8 ofzo
+          }
+          return result
+        }, [])
+      } else {
+        state.filterResults[data.name] = null
+      }
+      this.commit('filterMethods')
+    },
+    filterMethods (state) {
+      var finalFilters = []
+      for (const result in state.filterResults) {
+        var arr = state.filterResults[result]
+        // console.log(arr)
+        if (arr) finalFilters = finalFilters.concat(arr)
+      }
+      finalFilters = [...new Set(finalFilters)]
+      state.methods = state.allMethods.filter(o => finalFilters.indexOf(o.id) === -1)
+      
+      this.commit('availableMethods')
+    },
+    calculateAverages (state) {
+      for (const method of state.methods) { // Loop door alle methodes heen
+        // console.log(JSON.stringify(method))
+        var formatting = [{
+          name: 'ROI'
+        }, {
+          name: 'proceeds',
+          decimalPlaces: 2
+        }, {
+          name: 'margin'
+        }, {
+          name: 'conversionRate'
+        }, {
+          name: 'implementationTime'
+        }, {
+          name: 'totalTime'
+        }, {
+          name: 'costs',
+          decimalPlaces: 2
+        }]
+        method.average = {}
+        for (const obj of formatting) {
+          const average = getAverageOfArray(method.clientResults.map(o => o.data[obj.name]), obj.decimalPlaces)
+          if(!isNaN(average)){
+          method.average[obj.name] = average
+          }
+          else{
+            method.average[obj.name] = " "
           }
         }
       }
-
     },
-    timesUsed (state){
+    timesUsed (state) {
       for(const method of state.methods){
         method['timesUsed'] =  method.clientResults.length
+      }
+    },
+    availableMethods (state) {
+
+        state['availableMethods'] =  state.methods.length
+
+    },
+    getMinMax (state) {
+      for (var minMax in state.minMax) {
+        let arr = state.allMethods.reduce(function(result, o) {
+          if (o.average[minMax]) result.push(o.average[minMax])
+          return result
+        }, [])
+        state.minMax[minMax] = [Math.min(...arr), Math.max(...arr)]
+        state.selected[minMax] = [Math.min(...arr), Math.max(...arr)]
       }
     }
   },
   actions: {
+    loadData({commit}) {
+    	Axios.get(URL).then((response) => {
+        commit('storeMethods', response.data)
+        commit('storeAllMethods', response.data)
+        commit('calculateAverages')
+        commit('timesUsed')
+        commit('availableMethods')
+        commit('getMinMax')
+        commit('changeLoadingState', false)
+    	})
+    }
     // Als iemand een 'Nieuwe methode' toevoegt, wordt dat hier afgehandeld
   }
-});
+})
+
+function getAverageOfArray (arr, decimalPlaces = 0) {
+  let sum = 0
+  for (const a of arr) sum += a
+  let divider = arr.length
+  let avg
+  if (decimalPlaces) {
+    avg = '0'.repeat(decimalPlaces) + Math.round(sum / divider * Math.pow(10, decimalPlaces))
+    avg = parseFloat(avg.slice(0, decimalPlaces * -1) + '.' + avg.slice(decimalPlaces * -1), 10)
+  } else {
+    avg = Math.round(sum / divider)
+  }
+  return avg
+}
 
 // axios
 //   .get('http://methodbox.nl/api/methods')
 //   .then(response => (store.state.methods = response.data))
 
-store.commit('calculateAverages')
-store.commit('timesUsed')
 
 export default store

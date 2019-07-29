@@ -11,18 +11,18 @@
            <div class="fields">
            <Label>Titel</Label>
            <el-input
-                placeholder="Please input"
+                placeholder="Naam van de methode"
                 v-model="titel"
                 clearable>
             </el-input>
            </div>
            <div class="fields">
-           <Label>Korte introductie (maximaal 140 karakters)</Label>
+           <Label>Korte introductie (maximaal 160 karakters)</Label>
                 <el-input
                     type="textarea"
-                    placeholder="Please input"
+                    placeholder="Een korte introductie voor de mehtode kaarten"
                     v-model="intro"
-                    maxlength="140"
+                    maxlength="160"
                     show-word-limit
                     >
                 </el-input>
@@ -31,7 +31,7 @@
            <Label>Beschrijving</Label>
                 <el-input
                     type="textarea"
-                    placeholder="Please input"
+                    placeholder="Beschrijf de methode: waar moet op gelet worden? Wat houdt de methode in?"
                     v-model="discription"
                     show-word-limit
                     >
@@ -46,7 +46,7 @@
            </div>
 
             <div class="fields">
-                <Label>Sub categorie</Label>
+                <Label>Subcategorie</Label>
                 <el-select
                     v-model="subCategorie"
                     multiple
@@ -126,20 +126,20 @@ import Menu from './menu.vue'
 import MainCTA from './MainCTA.vue'
 import SecondCTA from './SecondCTA.vue'
 import thirdCTA from './thirdCTA.vue'
+import Axios from 'axios'
 
 export default {
     name: 'addMethodForm',
         data () {
         return {
             dialogVisible: false,
-            titel:'',
-            intro:'',
-            discription:'',
-            categorie:'',
-            subCategorie:[],
-            targetAudience:[],
-            expertise:[]
-
+            titel: '',
+            intro: '',
+            discription: '',
+            categorie: '',
+            subCategorie: [],
+            targetAudience: [],
+            expertise: []
         }
     },
     methods:{
@@ -147,15 +147,20 @@ export default {
             var data = {
                 'title': this.titel,
                 'intro': this.intro,
-                'discription': this.discription,
+                'description': this.discription,
                 'category': this.categorie,
                 'subCategory': this.subCategorie,
-                'target_audience': this.targetAudience,
+                'targetAudience': this.targetAudience,
                 'expertise': this.expertise
             }
 
-            console.log(data)
-            // VueX: It is saved, reload my data.
+            Axios.post('https://cors-anywhere.herokuapp.com/methodbox.nl/api/addMethod', data).then((response) => {
+              
+                data.id = response.data.data
+                this.$store.state.methods.push(data)
+                this.$store.dispatch('loadData') 
+                 this.$router.push('/Home/')
+            })
         },
         cancel (event) {
             this.$router.go(-1)

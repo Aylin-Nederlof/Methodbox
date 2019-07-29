@@ -7,18 +7,20 @@
         <div class="body">
         <div class="form card-bg" @submit.native.prevent>
            <h2>resultaat voor methode naam bewerken</h2>
+           {{resultaat}}
            <div class="subTitle">Vul alle gegevens in en druk op "Sla op".</div>
            <div class="fields">
                 <Label>Klantnaam</Label>
                 <el-input
-                        placeholder="Please input"
-                        v-model="name"
+                        placeholder="naam"
+                        v-model="resultaat.name"
                         clearable
                         >
                     </el-input>
            </div>
            <div class="fields">
-                <Label>Doorlooptijd{{dateRange}}</Label>
+                <Label>Doorlooptijd</Label>
+              
                 <el-date-picker
                     v-model="dateRange"
                     type="daterange"
@@ -30,16 +32,16 @@
            <div class="fields">
                 <Label>Implementatie tijd</Label>
                 <el-input
-                    placeholder="Please input"
-                    v-model.number="implementationTime"
+                    placeholder="Werk tijd in uren"
+                    v-model.number="resultaat.data.implementationTime"
                     clearable>
                 </el-input>
            </div>
             <div class="fields">
                 <Label>Kosten</Label>
                 <el-input
-                        placeholder="Please input"
-                        v-model.number="costs"
+                        placeholder="Kosten in euro's"
+                        v-model.number="resultaat.data.costs"
                         clearable
                         type="number">
                 </el-input>
@@ -48,8 +50,8 @@
             <div class="fields">
                 <Label>Opbrengsten</Label>
                 <el-input
-                    placeholder="Please input"
-                    v-model.number="proceeds"
+                    placeholder="Opbrengsten in euro's"
+                    v-model.number="resultaat.data.proceeds"
                     clearable
                     type="number">
                 </el-input>
@@ -57,8 +59,8 @@
            <div class="fields">
                 <Label>ROI</Label>
                 <el-input
-                    placeholder="Please input"
-                    v-model.number="ROI"
+                    placeholder="ROI in percentage"
+                    v-model.number="resultaat.data.ROI"
                     clearable
                    >
                 </el-input>
@@ -66,16 +68,16 @@
            <div class="fields">
                 <Label>Marge</Label>
                 <el-input
-                    placeholder="Please input"
-                    v-model.number="margin"
+                    placeholder="Marge in percentage"
+                    v-model.number="resultaat.data.margin"
                     clearable>
                 </el-input>
            </div>
            <div class="fields">
                 <Label>Conversie Ratio</Label>
                 <el-input
-                    placeholder="Please input"
-                    v-model.number="conversionRate"
+                    placeholder="Conversie ratio in percentage"
+                    v-model.number="resultaat.data.conversionRate"
                     clearable>
                 </el-input>
            </div>
@@ -111,13 +113,14 @@ import Menu from './menu.vue'
 import MainCTA from './MainCTA.vue'
 import SecondCTA from './SecondCTA.vue'
 import thirdCTA from './thirdCTA.vue'
+import Axios from 'axios'
 
 export default {
     name: 'addResult.vue',
     props: ['klantResultaatData'],
-        data () {
+    data () {
         return {
-            editResult: this.resultaat,
+           
             dialogVisible: false,
             name: '',
             dateRange:'',
@@ -133,19 +136,39 @@ export default {
     },
     methods:{
         save (event) {
-            var data = {
-                'name': this.name,
-                'ROI': this.ROI,
-                'proceeds': this.proceeds,
-                'margin': this.margin,
-                'conversionRate': this.conversionRate,
-                'totalTime': this.totalTime,
-                'implementationTime': this.implementationTime,
-                'costs': this.costs,
-                'dateRange': this.dateRange
+            var result = {
+                'name': this.resultaat.name,
+                'ROI': this.resultaat.data.ROI.toString(),
+                'proceeds': this.resultaat.data.proceeds.toString(),
+                'margin': this.resultaat.data.margin.toString(),
+                'conversionRate': this.resultaat.data.conversionRate.toString(),
+                'totalTime': Math.ceil(Math.abs(this.dateRange[1].getTime() - this.dateRange[0].getTime()) / (1000 * 60 * 60 * 24)).toString(),
+                'implementationTime': this.resultaat.data.implementationTime.toString(),
+                'costs': this.resultaat.data.costs.toString(),
+                'dateRange': this.dateRange.join()
             }
-
-            console.log(data)
+            var resultID = parseInt(this.resultID, 10)
+            Axios.post('https://cors-anywhere.herokuapp.com/methodbox.nl/api/editClientResult/'+ resultID, result).then(response => {
+                var name = result.name
+                delete result.name
+                result = {
+                    name: name,
+                    id: response.data.data,
+                    data: result
+                }
+                // this.$store.state.methods.find(function (u) { return u.id === methodID }).clientResults[resultID].push(result)
+               // zorgen dat gemiddelde  en aantal keren gebruikt opnieuw worden berekent
+               // terug naar detailview
+               
+               this.$store.dispatch('loadData')
+               this.$router.push('/DetailView/' + this.methodID + '/' + this.methode.title)   
+             
+            //   this.$store.commit('calculateAverages')
+            //     this.$store.commit('timesUsed')
+            //      this.$store.commit('getMinMax')
+            })
+            // console.log(result.dateRange)
+            // console.log(result.totalTime)
             // VueX: It is saved, reload my data.
         },
         cancel (event) {
@@ -164,7 +187,7 @@ export default {
                         let results = method.clientResults
                         for(const result of results){
                             if(result.id == this.resultID){
-                               console.log(result)
+                               
                                return result
 
                             }
@@ -172,6 +195,17 @@ export default {
                     }
                 }
                
+                return 'none'
+        },
+         methode () {
+                let methods = this.$store.state.methods
+
+                for (var no in methods){
+                    if(methods[no].id == this.methodID){
+                        return methods[no]
+                    }
+                }
+
                 return 'none'
         },
         methodID () {

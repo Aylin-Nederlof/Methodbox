@@ -12,9 +12,9 @@
             <el-col :sm="20" :md="20" class="alignItemsRight">
 
             <router-link :to="{ name: 'editMethodForm', params: {methodeID: methode.id, methodeNaam: methode.title }}"><thirdCTA class="alignedRight"><img class="iconMarginRight" slot="Icon" src="../assets/Icons/edit.svg" alt="">Bewerk</thirdCTA></router-link>
-            <router-link to="#"><thirdCTA class="alignedRight"><img class="iconMarginRight" src="../assets/Icons/archive.svg" alt="">Archiveer</thirdCTA></router-link>
+            <router-link to="#"><thirdCTA class="alignedRight"><img class="iconMarginRight"  slot="Icon" src="../assets/Icons/archive.svg" alt="">Archiveer</thirdCTA></router-link>
             <router-link :to="{ name: 'AddResult', params: {methodeID: methode.id, methodeNaam: methode.title }}"><MainCTA class="alignedRight"><img class="iconMarginRight" src="../assets/Icons/plusWhite.svg" alt="">Voeg resultaat toe</MainCTA></router-link>
-            <router-link to="#"><SecondCTA class="alignedRight"><img class="iconMarginRight" src="../assets/Icons/present.svg" alt="">Presentatie modus</SecondCTA></router-link>
+            <router-link to="#"><SecondCTA class="alignedRight"><img class="iconMarginRight"  slot="Icon" src="../assets/Icons/present.svg" alt="">Presentatie modus</SecondCTA></router-link>
             </el-col>
            
                
@@ -23,14 +23,17 @@
             <el-row :gutter="24">
                 <el-col :sm="16" :md="16">
                     <el-row>
-                    <div class="method card-bg">
+                    <div class="averages card-bg">
                         <el-row>
                         <el-col :span="20">
                             <div class="categoryTitle">
                                 <div class="categorie" v-bind:style="{ backgroundColor: categorieKleur }"></div>
                                 <div>
-                                <h2>{{methode.title}}</h2>
-                                <div  v-for="(subCategory, index) in methode.subCategory" :key="`subCategory-${index}`" class="subTitle">{{methode.category}} - {{subCategory}}</div>
+                                    <h2>{{methode.title}}</h2>
+                                    <ul class="categorisation subTitle">
+                                        <li>{{methode.category}}</li>
+                                        <li v-for="(subCategory, index) in methode.subCategory" :key="`subCategory-${index}`">{{subCategory}}</li>
+                                    </ul> 
                                 </div>
                             </div>
                         </el-col>
@@ -38,7 +41,7 @@
                     </el-row>
                     <el-row>
                     <div class="section">
-                        <p>{{methode.discription}}</p>
+                        <p>{{methode.description}}</p>
                     </div>
                     </el-row>
                     </div>
@@ -55,7 +58,7 @@
                         </div>
                      </el-row>         
 
-                    <el-row v-for="klantResultaat in OrderedResults" :key="klantResultaat.name">
+                    <el-row v-for="klantResultaat in OrderedResults" :key="klantResultaat.id">
                         <klantResultaat :klantResultaatData="klantResultaat"></klantResultaat>
                     </el-row>
 
@@ -117,9 +120,41 @@
                         </el-col>
                         </el-row>
                     </div>
+                    <div class="resultaten method">
+                        <label class="padding">Geschikt bij de doelgroep(en):</label>
+                        
+                            <div class="tags">
+                                <doelgroepTag v-for="(doelgroeptag, index) in methode.targetAudience" :key="index">{{doelgroeptag}}</doelgroepTag>
+                            </div>
+                        
+                    </div>
+                    <div class="resultaten method">
+                        <label class="padding">Benodigde expertise(s):</label>
+                       
+                            <div class="tags">
+                                <doelgroepTag v-for="(expertisetag, index) in methode.expertise" :key="index">{{expertisetag}}</doelgroepTag>
+                            </div>
+                        
+                    </div>
                 </el-col>
             </el-row>
         </div>
+        <div class="footer alignItemsRight">
+            <thirdCTA @click.native="dialogVisible = true" class="alignedRight"><img class="iconMarginRight" slot="Icon" src="../assets/Icons/delete.svg" alt="">Verwijder</thirdCTA>
+        </div>
+        <el-dialog
+            :visible.sync="dialogVisible"
+            width="30%">
+            <span class="dialog-flexer">
+            <img class="iconMarginRight" src="../assets/Icons/warning.svg" alt=""><h2>Waarschuwing</h2>
+             </span>
+            <p>Ingevulde gegevens zullen niet worden opgeslagen.</p>
+            <p>Weet je zeker dat je geen methode wil toevoegen?</p>
+            <span slot="footer" class="dialog-flexer">
+                <MainCTA slot="MainCTA" v-on:click.native="dialogVisible = false" >Niet verwijderen</MainCTA>
+                <thirdCTA class="alignedRight" @click.native="deleteMethod" >Verwijder methode</thirdCTA>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -132,39 +167,47 @@ import doelgroepTag from './doelgroepTag.vue'
 import Result from './Result.vue'
 import KlantResultaat from './KlantResultaat.vue'
 import _ from 'lodash'
+import Axios from 'axios'
 
     export default {
         name: 'DetailView',
         data () {
             return {
-                msg: 'bla',
+                dialogVisible: false,
                 selected: 'name_asc',
 
                 sortingOptions: {
-                    name_asc:    { order: { name: 'name',   object: 'name', direction: 'asc'  }, text: 'Sorteer op naam'},
-                    costs_asc:  { order: { name: 'costs', object: 'data.costs', direction: 'asc'  }, text: 'kosten - laag naar hoog'},
-                    costs_desc: { order: { name: 'costs', direction: 'desc' }, text: 'kosten - hoog naar laag'},
-                    ROI_asc:     { order: { name: 'ROI',    direction: 'asc'  }, text: 'ROI - laag naar hoog'},
-                    ROI_desc:    { order: { name: 'ROI',    direction: 'desc' }, text: 'ROI - hoog naar laag'}
+                    name_asc:   { order: { name: 'name',  direction: 'asc',  object: 'name'       }, text: 'Sorteer op naam' },
+                    costs_asc:  { order: { name: 'costs', direction: 'asc',  object: 'data.costs' }, text: 'kosten - laag naar hoog' },
+                    costs_desc: { order: { name: 'costs', direction: 'desc', object: 'data.costs' }, text: 'kosten - hoog naar laag' },
+                    ROI_asc:    { order: { name: 'ROI',   direction: 'asc',  object: 'data.ROI'   }, text: 'ROI - laag naar hoog' },
+                    ROI_desc:   { order: { name: 'ROI',   direction: 'desc', object: 'data.ROI'   }, text: 'ROI - hoog naar laag' }
                 }
                 
             }
         },
         methods: {
             getAverage (name) {
-                return this.methode["gem" + name]
+                return this.methode.average[name]
+            },
+            deleteMethod (event) {
+                Axios.get('https://cors-anywhere.herokuapp.com/methodbox.nl/api/deleteMethod/' + this.methodID).then(response => {
+                    // console.log(response)
+                    // data.id = response.data.data
+                    // this.$store.state.methods.push(data)
+                     this.$store.dispatch('loadData')
+                     this.$router.push('/Home/')   
+                })
             }
         },
         computed: {
             methode () {
                 let methods = this.$store.state.methods
-
                 for (var no in methods){
                     if(methods[no].id == this.methodID){
                         return methods[no]
                     }
                 }
-
                 return 'none'
             },
             categorieKleur: function () {
@@ -195,35 +238,48 @@ import _ from 'lodash'
 </script>
 
 <style scoped>
-    .section{
+    .section {
         margin: 0 0 40px;
     }
-
-   .resultaten{
-       border-radius: 4px;
-       padding: 24px 0;
-       background-color: #ffffff;
-       box-shadow: 0 0 1.5px 0 rgba(31,41,51,0.12), 0 1px 1px 0 rgba(31,41,51,0.24);
-   }
-   .padding{
-       padding: 0 24px 16px;
-   }
-   .method{
-       margin-bottom: 24px; 
-   }
-
-   .Result{
-       padding: 8px 24px;
-   }
-   
-   .klantresultaten{
-       display: flex;
-       align-items: center;
-       margin: 16px 0 40px;
-   }
-
-   .KlantResultaat{
+    .wrapper {
+        min-height: 100vh;
         display: flex;
-   }
+        flex-direction: column;
+    }
+    .main {
+        flex-grow: 1;
+    }
+    .resultaten {
+        border-radius: 4px;
+        padding: 24px 0;
+        background-color: #ffffff;
+        box-shadow: 0 0 1.5px 0 rgba(31,41,51,0.12), 0 1px 1px 0 rgba(31,41,51,0.24);
+    }
+    .padding{
+        padding: 0 24px 16px;
+    }
+    .tags{
+        margin: 0 24px;
+    }
+    .averages{
+        margin-bottom: 24px; 
+    }
+
+    .Result{
+        padding: 8px 24px;
+    }
+   
+    .klantresultaten{
+        display: flex;
+        align-items: center;
+        margin: 16px 0 40px;
+    }
+
+    .KlantResultaat{
+        display: flex;
+    }
+    .footer{
+        margin: 0 24px ;
+    }
 
 </style>

@@ -18,7 +18,7 @@
                     </el-input>
            </div>
            <div class="fields">
-                <Label>Doorlooptijd{{dateRange}}</Label>
+                <Label>Doorlooptijd</Label>
                 <el-date-picker
                     v-model="dateRange"
                     type="daterange"
@@ -111,6 +111,7 @@ import Menu from './menu.vue'
 import MainCTA from './MainCTA.vue'
 import SecondCTA from './SecondCTA.vue'
 import thirdCTA from './thirdCTA.vue'
+import Axios from 'axios';
 
 export default {
     name: 'addResult.vue',
@@ -131,19 +132,39 @@ export default {
     },
     methods:{
         save (event) {
-            var data = {
+            var result = {
                 'name': this.name,
-                'ROI': this.ROI,
-                'proceeds': this.proceeds,
-                'margin': this.margin,
-                'conversionRate': this.conversionRate,
-                'totalTime': this.totalTime,
-                'implementationTime': this.implementationTime,
-                'costs': this.costs,
-                'dateRange': this.dateRange
+                'ROI': this.ROI.toString(),
+                'proceeds': this.proceeds.toString(),
+                'margin': this.margin.toString(),
+                'conversionRate': this.conversionRate.toString(),
+                'totalTime': Math.ceil(Math.abs(this.dateRange[1].getTime() - this.dateRange[0].getTime()) / (1000 * 60 * 60 * 24)).toString(),
+                'implementationTime': this.implementationTime.toString(),
+                'costs': this.costs.toString(),
+                'dateRange': this.dateRange.join()
             }
-
-            console.log(data)
+            var methodID = parseInt(this.methodID, 10)
+            Axios.post('https://cors-anywhere.herokuapp.com/methodbox.nl/api/method/' + methodID + '/addClientResult', result).then(response => {
+                var name = result.name
+                delete result.name
+                result = {
+                    name: name,
+                    id: response.data.data,
+                    data: result
+                }
+                this.$store.state.methods.find(function (u) { return u.id === methodID }).clientResults.push(result)
+               // zorgen dat gemiddelde  en aantal keren gebruikt opnieuw worden berekent
+               // terug naar detailview
+               
+               this.$store.dispatch('loadData') 
+               this.$router.push('/DetailView/' + this.methodID + '/' + this.methode.title)   
+            
+            //   this.$store.commit('calculateAverages')
+            //     this.$store.commit('timesUsed')
+            //      this.$store.commit('getMinMax')
+            })
+            // console.log(result.dateRange)
+            // console.log(result.totalTime)
             // VueX: It is saved, reload my data.
         },
         cancel (event) {

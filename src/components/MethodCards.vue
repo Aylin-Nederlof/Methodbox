@@ -9,7 +9,10 @@
                 <div class="categorie" v-bind:style="{ backgroundColor: categorieKleur }"></div>
                 <div>
                   <h2>{{methodData.title}}</h2>
-                  <div v-for="(subCategory, index) in methodData.subCategory" :key="`subCategory-${index}`" class="subTitle">{{methodData.category}} - {{subCategory}}</div>
+                  <ul class="categorisation subTitle">
+                    <li>{{methodData.category}}</li>
+                    <li v-for="(subCategory, index) in methodData.subCategory" :key="`subCategory-${index}`">{{subCategory}}</li>
+                  </ul>
                 </div>
               </div>
             </router-link>
@@ -21,7 +24,7 @@
             <p>{{methodData.intro}}</p>
           </div>
         </el-row>
-        <el-row class="section">
+        <el-row class="section margin-bottom">
           <label>Doelgroep:</label>
           <div class="tags">
               <doelgroepTag v-for="(doelgroeptag, index) in methodData.targetAudience" :key="index">{{doelgroeptag}}</doelgroepTag>
@@ -86,7 +89,7 @@ export default {
 
   methods: {
       getAverage (name) {
-        return this.methodData["gem" + name]
+        return this.methodData.average[name]
       }
   },
   computed: {
@@ -114,18 +117,42 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
-.method{
+.method {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 24px;
 }
 
-.categorie{
+.margin-bottom {
+  margin-bottom: auto;
+}
+
+.categorie {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin:0 16px 0 0;
+  flex: 0 0 40px;
 }
 
-.specificaties{
+.categorisation {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.categorisation li:first-child:not(:only-child)::after {
+  content: '\a0-\a0';
+}
+
+.categorisation li:not(:first-child):not(:last-child)::after {
+  content: ',\a0';
+}
+
+.specificaties {
   padding: 3px 0;
   text-align: center;
 }
@@ -153,14 +180,6 @@ export default {
     }
 .el-row:last-child {
     margin-bottom: 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
 }
 a {
   text-decoration: none;
