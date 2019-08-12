@@ -111,7 +111,7 @@
             :visible.sync="dialogVisible"
             width="30%">
             <span class="dialog-flexer">
-            <img class="iconMarginRight" src="../assets/Icons/warning.svg" alt=""><h2>Waarschuwing</h2>
+            <img class="iconMarginRight" src="../assets/Icons/warningRed.svg" alt=""><h2 class="warningText">Waarschuwing</h2>
              </span>
             <p>De wijzigingen zullen niet worden opgeslagen.</p>
             <p>Weet je zeker dat wil stoppen met bewerken?</p>
@@ -294,4 +294,10 @@ label.el-radio{
     padding: 0;
     display: flex;
 }
+
+.warningText{
+    color:#CC2200 !important;
+}
+
+
 </style>

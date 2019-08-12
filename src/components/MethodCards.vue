@@ -3,7 +3,7 @@
     <el-col :xs="24" :sm="12" :md="12" :lg="8">
       <div class="method card-bg">
         <el-row>
-          <el-col :span="20">
+          <el-col :span="22">
             <router-link :to="{ name: 'DetailView', params: {methodeID: methodData.id, methodeNaam: methodData.title }}">
               <div class="categoryTitle">
                 <div class="categorie" v-bind:style="{ backgroundColor: categorieKleur }"></div>
@@ -17,7 +17,7 @@
               </div>
             </router-link>
           </el-col>
-          <el-col :span="4" class="alignItemsRight">{{methodData.timesUsed}}x</el-col>
+          <el-col :span="2" class="alignItemsRight">{{methodData.timesUsed}}x</el-col>
         </el-row>
         <el-row>
           <div class="section">
@@ -32,7 +32,7 @@
         </el-row>
         <el-row  class="section">
           <label>Gemiddelde resultaten:</label>
-          <el-row :gutter="48">
+          <el-row :gutter="48" >
           <el-col :xs="24" :sm="12" :md="12" :lg="12">
               <Result>
                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/ROI.svg" alt="">
@@ -96,20 +96,19 @@ export default {
     categorieKleur: function () {
       var kleur = ''
       if (this.methodData.category === 'Focus') {
-        kleur = 'rgba(218,0,255,1)'
+        kleur = '#DA00FF' // dit moeten nog "categorie logo's" worden.
       } else if (this.methodData.category === 'Visibility') {
-        kleur = 'rgba(255,0,91,1)'
+        kleur = '#FFD500' // dit moeten nog "categorie logo's" worden.
       } else if (this.methodData.category === 'Transfer') {
-        kleur = 'rgba(0,176,255,1)'
+        kleur = '#00B0FF' // dit moeten nog "categorie logo's" worden.
       } else if (this.methodData.category === 'Fullfil') {
-        kleur = 'rgba(255,213,0,1)'
+        kleur = '#FF005B' // dit moeten nog "categorie logo's" worden.
       } else {
         kleur = 'rgba(228,232,235,1)'
       }
       return kleur
     }
 
-    
   },
   components: {thirdCTA, doelgroepTag, Result}
 
@@ -136,21 +135,7 @@ export default {
   flex: 0 0 40px;
 }
 
-.categorisation {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-}
 
-.categorisation li:first-child:not(:only-child)::after {
-  content: '\a0-\a0';
-}
-
-.categorisation li:not(:first-child):not(:last-child)::after {
-  content: ',\a0';
-}
 
 .specificaties {
   padding: 3px 0;
@@ -175,8 +160,9 @@ export default {
     clear: both
   }
 
-.el-row {
-    /* margin-bottom: 20px; */
+.averages{
+    margin-top: 8px;
+
     }
 .el-row:last-child {
     margin-bottom: 0;

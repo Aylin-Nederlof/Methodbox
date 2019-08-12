@@ -12,11 +12,11 @@
             <el-col :sm="20" :md="20" class="alignItemsRight">
 
             <router-link :to="{ name: 'editMethodForm', params: {methodeID: methode.id, methodeNaam: methode.title }}"><thirdCTA class="alignedRight"><img class="iconMarginRight" slot="Icon" src="../assets/Icons/edit.svg" alt="">Bewerk</thirdCTA></router-link>
-            <router-link to="#"><thirdCTA class="alignedRight"><img class="iconMarginRight"  slot="Icon" src="../assets/Icons/archive.svg" alt="">Archiveer</thirdCTA></router-link>
+            <router-link to="#"><thirdCTA class="alignedRight disabled"><img class="iconMarginRight"  slot="Icon" src="../assets/Icons/archive.svg" alt="">Archiveer</thirdCTA></router-link>
             <router-link :to="{ name: 'AddResult', params: {methodeID: methode.id, methodeNaam: methode.title }}"><MainCTA class="alignedRight"><img class="iconMarginRight" src="../assets/Icons/plusWhite.svg" alt="">Voeg resultaat toe</MainCTA></router-link>
-            <router-link to="#"><SecondCTA class="alignedRight"><img class="iconMarginRight"  slot="Icon" src="../assets/Icons/present.svg" alt="">Presentatie modus</SecondCTA></router-link>
+            <router-link to="#" @click.native="toggle()"><SecondCTA class="alignedRight PresentatieModusBtn" v-bind:class="{ presentationModusActive: this.$store.state.presentationModus }"><img class="iconMarginRight"  slot="Icon" src="../assets/Icons/present.svg" alt="" >Presentatie modus</SecondCTA></router-link>
             </el-col>
-           
+
                
         </el-row>
         <div class="main">
@@ -41,7 +41,7 @@
                     </el-row>
                     <el-row>
                     <div class="section">
-                        <p>{{methode.description}}</p>
+                        <p style="white-space: pre-line;">{{methode.description}}</p>
                     </div>
                     </el-row>
                     </div>
@@ -51,15 +51,15 @@
                         <el-col :span="12"><label> Klant resultaten ({{methode.timesUsed}}):</label></el-col>
                         
                         <el-col :span="12" class="alignItemsRight">
-                            <select v-model="selected" class="alignedRight sorteer">
-                                <option v-for="(option, key) in sortingOptions" :key="key" v-bind:value="option.order.name + '_' + option.order.direction">{{ option.text }}</option>
-                            </select>
+                            <el-select v-model="selected" class="alignedRight sort">
+                                <el-option v-for="(option, key) in sortingOptions" :key="key" :label="option.text" v-bind:value="option.order.name + '_' + option.order.direction">{{ option.text }}</el-option>
+                            </el-select>
                         </el-col>
                         </div>
                      </el-row>         
 
-                    <el-row v-for="klantResultaat in OrderedResults" :key="klantResultaat.id">
-                        <klantResultaat :klantResultaatData="klantResultaat"></klantResultaat>
+                    <el-row v-for="(klantResultaat, index) in OrderedResults" :key="index">
+                        <klantResultaat :klantResultaatData="klantResultaat" :klantIndex="index"></klantResultaat>
                     </el-row>
 
                     <!-- <p v-for="klantResultaat in orderedUsers" :key="klantResultaat.naam">test</p> -->
@@ -104,7 +104,7 @@
                                 <div slot="Value" class="subTitle">€ {{getAverage('costs')}}</div>
                             </Result>
                         </el-col>
-                        <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                        <!-- <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <Result>
                                 <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Marge.svg" alt="">
                                 <div slot="Key" class="subTitle">Marge</div>
@@ -117,7 +117,7 @@
                                 <div slot="Key" class="subTitle">Conversie ratio</div>
                                 <div slot="Value" class="subTitle">{{getAverage('conversionRate')}}%</div>
                             </Result>
-                        </el-col>
+                        </el-col> -->
                         </el-row>
                     </div>
                     <div class="resultaten method">
@@ -146,7 +146,7 @@
             :visible.sync="dialogVisible"
             width="30%">
             <span class="dialog-flexer">
-            <img class="iconMarginRight" src="../assets/Icons/warning.svg" alt=""><h2>Waarschuwing</h2>
+            <img class="iconMarginRight" src="../assets/Icons/warningRed.svg" alt=""><h2 class="warningText">Waarschuwing</h2>
              </span>
             <p>Ingevulde gegevens zullen niet worden opgeslagen.</p>
             <p>Weet je zeker dat je geen methode wil toevoegen?</p>
@@ -198,6 +198,10 @@ import Axios from 'axios'
                      this.$store.dispatch('loadData')
                      this.$router.push('/Home/')   
                 })
+            },
+            toggle: function(){
+                this.$store.state.presentationModus = !this.$store.state.presentationModus
+                console.log(this.$store.state.presentationModus)
             }
         },
         computed: {
@@ -210,21 +214,21 @@ import Axios from 'axios'
                 }
                 return 'none'
             },
-            categorieKleur: function () {
+             categorieKleur: function () {
                 var kleur = ''
                 if (this.methode.category === 'Focus') {
-                    kleur = 'rgba(218,0,255,1)'
+                    kleur = '#DA00FF' // dit moeten nog "categorie logo's" worden.
                 } else if (this.methode.category === 'Visibility') {
-                    kleur = 'rgba(255,0,91,1)'
+                    kleur = '#FFD500' // dit moeten nog "categorie logo's" worden.
                 } else if (this.methode.category === 'Transfer') {
-                    kleur = 'rgba(0,176,255,1)'
+                    kleur = '#00B0FF' // dit moeten nog "categorie logo's" worden.
                 } else if (this.methode.category === 'Fullfil') {
-                    kleur = 'rgba(255,213,0,1)'
+                    kleur = '#FF005B' // dit moeten nog "categorie logo's" worden.
                 } else {
                     kleur = 'rgba(228,232,235,1)'
                 }
                 return kleur
-            },
+                },
             OrderedResults () {
                 var selected = this.sortingOptions[this.selected]
                 return _.orderBy(this.methode.clientResults, selected.order.object, selected.order.direction)
@@ -237,7 +241,13 @@ import Axios from 'axios'
     }
 </script>
 
-<style scoped>
+<style scoped >
+    .presentationModusActive{
+        background-color:   #7B8794;
+        color:              #FFF
+    }
+
+
     .section {
         margin: 0 0 40px;
     }
@@ -255,6 +265,7 @@ import Axios from 'axios'
         background-color: #ffffff;
         box-shadow: 0 0 1.5px 0 rgba(31,41,51,0.12), 0 1px 1px 0 rgba(31,41,51,0.24);
     }
+   
     .padding{
         padding: 0 24px 16px;
     }
@@ -281,5 +292,7 @@ import Axios from 'axios'
     .footer{
         margin: 0 24px ;
     }
+
+  
 
 </style>

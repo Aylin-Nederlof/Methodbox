@@ -96,7 +96,7 @@
             :visible.sync="dialogVisible"
             width="30%">
             <span class="dialog-flexer">
-            <img class="iconMarginRight" src="../assets/Icons/warning.svg" alt=""><h2>Waarschuwing</h2>
+            <img class="iconMarginRight" src="../assets/Icons/warningRed.svg" alt=""><h2 class="warningText">Waarschuwing</h2>
              </span>
             <p>gewijzigde gegevens zullen niet worden opgeslagen.</p>
             <p>Weet je zeker dat je wil stoppen met bewerken?</p>
@@ -299,9 +299,16 @@ label.el-radio{
     padding: 0;
     display: flex;
 }
+
 .el-date-editor--daterange.el-input__inner{
     width: 100%;
 }
+
+.warningText{
+    color:#CC2200 !important;
+}
+
+
 @media only screen and (max-width: 1100px) {
     .el-dialog{
         width: 50% !important;

@@ -16,14 +16,15 @@
                 clearable>
             </el-input>
            </div>
-           <div class="fields">
-           <Label>Korte introductie (maximaal 160 karakters)</Label>
+           <div class="fields" style="display: flex; flex-wrap: wrap;">
+           
+           <Label>Korte introductie (maximaal 160 karakters)</Label> <p class="characterCount" v-bind:class="{'text-danger': hasError }">{{remainingCount}}</p>
+   
                 <el-input
-                    type="textarea"
-                    placeholder="Een korte introductie voor de mehtode kaarten"
-                    v-model="intro"
+                    type="textarea" v-on:keyup.native="countdown"
+                    placeholder="Een korte introductie voor de methode kaarten"
+                    v-model="intro" 
                     maxlength="160"
-                    show-word-limit
                     >
                 </el-input>
            </div>
@@ -109,13 +110,13 @@
             :visible.sync="dialogVisible"
             width="30%">
             <span class="dialog-flexer">
-            <img class="iconMarginRight" src="../assets/Icons/warning.svg" alt=""><h2>Waarschuwing</h2>
+            <img class="iconMarginRight" src="../assets/Icons/warningRed.svg" alt=""><h2 class="warningText">Waarschuwing</h2>
              </span>
             <p>Ingevulde gegevens zullen niet worden opgeslagen.</p>
             <p>Weet je zeker dat je geen methode wil toevoegen?</p>
             <span slot="footer" class="dialog-flexer">
                 <MainCTA slot="MainCTA" v-on:click.native="dialogVisible = false" >Verder met toevoegen</MainCTA>
-                <thirdCTA class="alignedRight" @click.native="cancel" >Stoppen</thirdCTA>
+                <thirdCTA class="alignedRight" @click.native="cancel">Stoppen</thirdCTA>
             </span>
         </el-dialog>
 
@@ -132,6 +133,9 @@ export default {
     name: 'addMethodForm',
         data () {
         return {
+            maxCount: 160,
+            remainingCount: 160,
+            hasError: false,
             dialogVisible: false,
             titel: '',
             intro: '',
@@ -143,6 +147,12 @@ export default {
         }
     },
     methods:{
+        countdown: function() {
+            // console.log("test")
+            this.remainingCount = this.maxCount - this.intro.length
+            console.log(this.remainingCount)
+            this.hasError = this.remainingCount < 0
+        },
         save (event) {
             var data = {
                 'title': this.titel,
@@ -291,6 +301,10 @@ label.el-radio{
     padding: 0;
     display: flex;
 }
+.warningText{
+    color:#CC2200 !important;
+}
+
 
 @media only screen and (max-width: 1100px) {
     .el-dialog{

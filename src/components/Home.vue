@@ -139,12 +139,9 @@ export default {
 .methods{
   display: flex;
   flex-wrap: wrap;
-  margin: 56px 0;
+  margin: 48px 0;
 }
 
-.sort{
-  width: 272px;
-}
 .methods > *,
 .methods > * > * {
   display: contents;

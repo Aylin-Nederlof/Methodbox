@@ -5,24 +5,24 @@
       <div class="filter">
         <label>Categorie</label>
         <div class="categorieën">
-          <label class="categorieFilter" for="focus" v-bind:class="[{ 'focusActive active': this.$store.state.selected.category.includes('Focus') }]">
+          <label class="categorieFilter focusHover" for="focus" v-bind:class="[{ 'focusActive active': this.$store.state.selected.category.includes('Focus') }]">
           <input hidden type="checkbox" id="focus" value="Focus" v-model="checkedCategorie" @change="getSelectedCategory()">
           Focus
        
           </label>
 <!-- @click="categoryActive() -->
 
-          <label class="categorieFilter" for="visibility" v-bind:class="[{ 'visibilityActive active': this.$store.state.selected.category.includes('Visibility') }]">
+          <label class="categorieFilter visibilityHover" for="visibility" v-bind:class="[{ 'visibilityActive active': this.$store.state.selected.category.includes('Visibility') }]">
           <input hidden type="checkbox" id="visibility" value="Visibility" v-model="checkedCategorie"  @change="getSelectedCategory()">
           Visibility
           </label>
 
-          <label class="categorieFilter" for="transfer" v-bind:class="[{ 'transferActive active': this.$store.state.selected.category.includes('Transfer') }]">
+          <label class="categorieFilter transferHover" for="transfer" v-bind:class="[{ 'transferActive active': this.$store.state.selected.category.includes('Transfer') }]">
           <input hidden type="checkbox" id="transfer" value="Transfer" v-model="checkedCategorie"  @change="getSelectedCategory()">
           Transfer
           </label>
           
-          <label class="categorieFilter" for="fullfil" v-bind:class="[{ 'fullfilActive active': this.$store.state.selected.category.includes('Fullfil') }]">
+          <label class="categorieFilter fullfilHover" for="fullfil" v-bind:class="[{ 'fullfilActive active': this.$store.state.selected.category.includes('Fullfil') }]">
           <input hidden type="checkbox" id="fullfil" value="Fullfil" v-model="checkedCategorie"  @change="getSelectedCategory()">
           Fullfil
           </label>
@@ -292,10 +292,19 @@ input.el-input__inner:hover {
 .active{
   color:#fff;
 }
-.focusActive{      background-color: #DA00FF; }
-.visibilityActive{ background-color: #FF005B; }
-.transferActive{   background-color: #00B0FF; }
-.fullfilActive{    background-color: #FFD500; }
+
+.focusHover{      background-color: #F9CCFF; color: #870099} 
+.visibilityHover{ background-color: #FFF7CC; color: #998100}
+.transferHover{   background-color: #CCEFFF; color: #006999}
+.fullfilHover{    background-color: #FFCCDE; color: #990036} 
+/* .focusHover{      background-color: #F399FF; color: #FFF}
+.visibilityHover{ background-color: #FFEF99; color: #FFF}
+.transferHover{   background-color: #99DFFF; color: #FFF}
+.fullfilHover{    background-color: #FF99BD; color: #FFF} */
+.focusActive{           background-color: #DA00FF; color: #FFF}
+.visibilityActive{      background-color: #FFD500; color: #FFF}
+.transferActive{        background-color: #00B0FF; color: #FFF}
+.fullfilActive{         background-color: #FF005B; color: #FFF}
 
 .el-select-dropdown{
   width:10%;

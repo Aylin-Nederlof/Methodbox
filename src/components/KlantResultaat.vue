@@ -1,14 +1,20 @@
 <template>
     <div class="resultaten">
         <el-row class="padding">
-            <el-col :span="20"><label>{{klantResultaatData.name}}</label></el-col>
+            
+            <el-col :span="20">
+                
+                <label v-if="this.$store.state.presentationModus">klant nr: {{klantIndex+1}}</label>
+                <label v-else>{{klantResultaatData.name}}</label>
+            
+            </el-col>
                 <el-col :span="4" class="alignItemsRight">
                     <router-link :to="{ name: 'editResult', params: {methodeID: methode.id, resultID: klantResultaatData.id, klantResultaatData: klantResultaatData }}"><img src="../assets/Icons/edit.svg" alt=""></router-link>
                     <button v-on:click="dialogVisible = true" ><img slot="Icon" class="iconMarginLeft" src="../assets/Icons/delete.svg" alt=""></button>
                 </el-col>
             </el-row>
         <div class="klantResultaten">
-            <el-col :xs="24" :sm="24" :md="24" :lg="24">
+            <el-col :xs="24" :sm="24" :md="24" :lg="24" class="grey">
                 <el-col :xs="24" :sm="12" :md="12" :lg="12">
                     <Result >
                         <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/ROI.svg" alt="">
@@ -24,14 +30,7 @@
                     </Result>
                 </el-col>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="24" :lg="24" class="grey">
-                <el-col :xs="24" :sm="12" :md="12" :lg="12">
-                    <Result>
-                        <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Opbrengsten.svg" alt="">
-                        <div slot="Key" class="subTitle">Opbrengsten</div>
-                        <div slot="Value" class="subTitle">€ {{klantResultaatData.data.proceeds}}</div>
-                    </Result>
-                </el-col>
+            <el-col :xs="24" :sm="24" :md="24" :lg="24" >
                 <el-col :xs="24" :sm="12" :md="12" :lg="12">
                     <Result>
                         <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Doorlooptijd.svg" alt="">
@@ -39,15 +38,15 @@
                         <div slot="Value" class="subTitle">{{klantResultaatData.data.totalTime}}d</div>
                     </Result>
                 </el-col>
-            </el-col>
-            <el-col :xs="24" :sm="24" :md="24" :lg="24">
                 <el-col :xs="24" :sm="12" :md="12" :lg="12">
                     <Result>
-                        <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Marge.svg" alt="">
-                        <div slot="Key" class="subTitle">Marge</div>
-                        <div slot="Value" class="subTitle">{{klantResultaatData.data.margin}}%</div>
+                        <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Opbrengsten.svg" alt="">
+                        <div slot="Key" class="subTitle">Opbrengsten</div>
+                        <div slot="Value" class="subTitle">€ {{klantResultaatData.data.proceeds}}</div>
                     </Result>
                 </el-col>
+            </el-col>
+            <el-col :xs="24" :sm="24" :md="24" :lg="24" class="grey">
                 <el-col :xs="24" :sm="12" :md="12" :lg="12">
                     <Result>
                         <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Implementatietijd.svg" alt="">
@@ -56,21 +55,13 @@
                     </Result>
                 </el-col>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="24" :lg="24" class="grey">
-                <el-col :xs="24" :sm="12" :md="12" :lg="12">
-                    <Result>
-                        <img class="iconMarginRight" slot="Icon2" src="../assets/Icons/Conversie.svg" alt="">
-                        <div slot="Key" class="subTitle">Conversie Ratio</div>
-                        <div slot="Value" class="subTitle">{{klantResultaatData.data.conversionRate}}%</div>
-                    </Result>
-                </el-col>
-            </el-col>
+            
         </div>
         <el-dialog
             :visible.sync="dialogVisible"
             width="30%">
             <span class="dialog-flexer">
-            <img class="iconMarginRight" src="../assets/Icons/warning.svg" alt=""><h2>Waarschuwing</h2>
+            <img class="iconMarginRight" src="../assets/Icons/warningRed.svg" alt=""><h2 class="warningText">Waarschuwing</h2>
                 </span>
             <p>Ingevulde gegevens zullen niet worden opgeslagen.</p>
             <p>Weet je zeker dat je geen methode wil toevoegen?</p>
@@ -92,7 +83,7 @@ import Axios from 'axios'
 export default {
 
   name: 'KlantResultaat',
-  props: ['klantResultaatData'],
+  props: ['klantResultaatData', 'klantIndex'],
   data () {
     return {
         dialogVisible: false
@@ -125,7 +116,7 @@ export default {
                 clientResults = clientResults.splice(index, 1)
                
                  this.$store.dispatch('loadData') 
-                dialogVisible = false
+                this.dialogVisible = false
             })
         }
   },

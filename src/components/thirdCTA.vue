@@ -1,7 +1,7 @@
 <template>
   <button class="thirdCTA">
   <slot name="Icon"></slot>
-  <span><slot></slot></span>
+  <span class="warning"><slot></slot></span>
   </button>
 </template>
 
@@ -38,6 +38,9 @@ button{
   align-self: middle;
   border-bottom: 1px solid #1F2933;
 }
+
+
+
 </style>
 
 

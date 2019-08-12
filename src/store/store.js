@@ -11,8 +11,9 @@ const store = new Vuex.Store({
   state: {
     methods: [],
     allMethods:[],
+    presentationModus:    false,
     availableMethods:     null,
-    loading: true,
+    loading:              true,
     minMax: {
       totalTime:          null,
       implementationTime: null,
@@ -51,6 +52,10 @@ const store = new Vuex.Store({
     },
     changeLoadingState (state, loading) {
     	state.loading = loading
+    },
+    changePresentationState (state) {
+      
+      state.presentationModus = state.presentationModus == true ? false : true
     },
     changeActiveState (state, status) {
     	state.selected.activeOrNoneActive = status
@@ -124,9 +129,9 @@ const store = new Vuex.Store({
           name: 'proceeds',
           decimalPlaces: 2
         }, {
-          name: 'margin'
+          name: 'margin'// Deze mag in de toekomst weg, hier moet in de back end iets voor worden aangepast
         }, {
-          name: 'conversionRate'
+          name: 'conversionRate'// Deze mag in de toekomst weg, hier moet in de back end iets voor worden aangepast
         }, {
           name: 'implementationTime'
         }, {

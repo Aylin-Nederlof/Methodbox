@@ -30,4 +30,14 @@ export default {
   font-size: inherit;
   align-self: middle;
 }
+
+.mainCTA:hover {
+    background-color:  #3E4C59;
+    color:             #FFF;
+  }
+
+  .mainCTA:active {
+    background-color:  #7B8794;
+    color:             #FFF;
+  }
 </style>

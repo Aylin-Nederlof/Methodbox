@@ -63,7 +63,7 @@
                    >
                 </el-input>
            </div>
-           <div class="fields">
+           <!-- <div class="fields">
                 <Label>Marge</Label>
                 <el-input
                     placeholder="Please input"
@@ -78,7 +78,7 @@
                     v-model.number="conversionRate"
                     clearable>
                 </el-input>
-           </div>
+           </div> -->
             <div class="buttons">
             <MainCTA slot="MainCTA" v-on:click.native="save" >Voeg toe</MainCTA>
             <SecondCTA class="alignedRight" @click.native="dialogVisible = true" >Annuleren</SecondCTA>
@@ -94,7 +94,7 @@
             :visible.sync="dialogVisible"
             width="30%">
             <span class="dialog-flexer">
-            <img class="iconMarginRight" src="../assets/Icons/warning.svg" alt=""><h2>Waarschuwing</h2>
+            <img class="iconMarginRight" src="../assets/Icons/warningRed.svg" alt=""><h2 class="warningText">Waarschuwing</h2>
              </span>
             <p>Ingevulde gegevens zullen niet worden opgeslagen.</p>
             <p>Weet je zeker dat je geen resultaat wil toevoegen?</p>
@@ -122,8 +122,8 @@ export default {
             dateRange:'',
             ROI: '', // in percentage
             proceeds: '', // in euro's
-            margin: '', // in percentage
-            conversionRate: '', // in percentage
+            margin: '0', // in percentage // Deze mag in de toekomst weg, hier moet in de back end iets voor worden aangepast
+            conversionRate: '0', // in percentage // Deze mag in de toekomst weg, hier moet in de back end iets voor worden aangepast
             implementationTime: '', // in work hours
             totalTime: '', // in work days
             costs: '' // in euro's
@@ -136,8 +136,8 @@ export default {
                 'name': this.name,
                 'ROI': this.ROI.toString(),
                 'proceeds': this.proceeds.toString(),
-                'margin': this.margin.toString(),
-                'conversionRate': this.conversionRate.toString(),
+                'margin': this.margin.toString(), // Deze mag in de toekomst weg, hier moet in de back end iets voor worden aangepast
+                'conversionRate': this.conversionRate.toString(), // Deze mag in de toekomst weg, hier moet in de back end iets voor worden aangepast
                 'totalTime': Math.ceil(Math.abs(this.dateRange[1].getTime() - this.dateRange[0].getTime()) / (1000 * 60 * 60 * 24)).toString(),
                 'implementationTime': this.implementationTime.toString(),
                 'costs': this.costs.toString(),
@@ -157,7 +157,8 @@ export default {
                // terug naar detailview
                
                this.$store.dispatch('loadData') 
-               this.$router.push('/DetailView/' + this.methodID + '/' + this.methode.title)   
+               var methodName = this.methode.title.replace('/', '%2F');
+               this.$router.push('/DetailView/' + this.methodID + '/' + methodName)   
             
             //   this.$store.commit('calculateAverages')
             //     this.$store.commit('timesUsed')
@@ -264,6 +265,11 @@ label.el-radio{
 .el-dialog__footer {
     padding: 0 24px 24px;
 }
+
+.warningText{
+    color:#CC2200 !important;
+}
+
 
 .dialog-flexer{
     padding: 0;
