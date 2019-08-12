@@ -164,7 +164,7 @@ export default {
                 'expertise': this.expertise
             }
 
-            Axios.post('https://cors-anywhere.herokuapp.com/methodbox.nl/api/addMethod', data).then((response) => {
+            Axios.post('https://methodbox.nl/api/addMethod', data).then((response) => {
               
                 data.id = response.data.data
                 this.$store.state.methods.push(data)

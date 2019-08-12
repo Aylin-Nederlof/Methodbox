@@ -144,7 +144,7 @@ export default {
                 'dateRange': this.dateRange.join()
             }
             var methodID = parseInt(this.methodID, 10)
-            Axios.post('https://cors-anywhere.herokuapp.com/methodbox.nl/api/method/' + methodID + '/addClientResult', result).then(response => {
+            Axios.post('https://methodbox.nl/api/method/' + methodID + '/addClientResult', result).then(response => {
                 var name = result.name
                 delete result.name
                 result = {
@@ -222,7 +222,7 @@ form{
     display: flex;
     width:32.2%;
      /* margin-left: auto; */
-     z-index: 22000;
+     /* z-index: 22000; */
 }
 .annuleren button.thirdCTA{
     height: 24px;

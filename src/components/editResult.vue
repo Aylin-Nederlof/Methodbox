@@ -148,7 +148,7 @@ export default {
                 'dateRange': this.dateRange.join()
             }
             var resultID = parseInt(this.resultID, 10)
-            Axios.post('https://cors-anywhere.herokuapp.com/methodbox.nl/api/editClientResult/'+ resultID, result).then(response => {
+            Axios.post('https://methodbox.nl/api/editClientResult/'+ resultID, result).then(response => {
                 var name = result.name
                 delete result.name
                 result = {

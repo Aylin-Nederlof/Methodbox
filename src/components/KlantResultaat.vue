@@ -68,7 +68,6 @@
             <span slot="footer" class="dialog-flexer">
                 <MainCTA slot="MainCTA" @click.native="dialogVisible = false" >Annuleren</MainCTA>
                 <thirdCTA class="alignedRight" @click.native="deleteResult">Verwijderen</thirdCTA>
-                    {{klantResultaatData.id}}
             </span>
         </el-dialog>
     </div>
@@ -110,7 +109,7 @@ export default {
         deleteResult (event) {
             var KlantResultaatID = parseInt(this.klantResultaatData.id, 10)
             var methodID = parseInt(this.methodID, 10)
-            Axios.delete('https://cors-anywhere.herokuapp.com/methodbox.nl/api/deleteClientResult/' + KlantResultaatID).then(response => {
+            Axios.delete('https://methodbox.nl/api/deleteClientResult/' + KlantResultaatID).then(response => {
                 var clientResults = this.$store.state.methods.find(function (u) { return u.id === methodID }).clientResults
                 var index = clientResults.findIndex(function (r) { return r.id === KlantResultaatID })
                 clientResults = clientResults.splice(index, 1)

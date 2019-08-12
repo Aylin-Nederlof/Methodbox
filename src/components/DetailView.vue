@@ -191,7 +191,7 @@ import Axios from 'axios'
                 return this.methode.average[name]
             },
             deleteMethod (event) {
-                Axios.get('https://cors-anywhere.herokuapp.com/methodbox.nl/api/deleteMethod/' + this.methodID).then(response => {
+                Axios.get('https://methodbox.nl/api/deleteMethod/' + this.methodID).then(response => {
                     // console.log(response)
                     // data.id = response.data.data
                     // this.$store.state.methods.push(data)
